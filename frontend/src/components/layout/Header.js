@@ -30,7 +30,7 @@ const Header = () => {
 								component="div"
 								sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
 							>
-								LOGO
+								MERN STORE
 							</Typography>
 
 							<Typography
@@ -39,7 +39,7 @@ const Header = () => {
 								component="div"
 								sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
 							>
-								LOGO
+								MERN STORE
 							</Typography>
 							<Box
 								sx={{
