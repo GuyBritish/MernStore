@@ -1,18 +1,20 @@
 import React from "react";
 
-import products from "../../products";
+import Product from "./Product";
 
 import { Grid } from "@mui/material";
+
+import products from "../../products";
 
 const ProductList = () => {
 	return (
 		<React.Fragment>
 			<h1>Latest Products</h1>
-			<Grid container>
+			<Grid container className="my-3" spacing={3}>
 				{products.map((prod) => {
 					return (
 						<Grid item sm={12} md={6} lg={4} xl={3}>
-							<h3>{prod.name}</h3>
+							<Product product={prod} />
 						</Grid>
 					);
 				})}
