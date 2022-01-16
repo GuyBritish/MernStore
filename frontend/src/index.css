@@ -6,6 +6,14 @@ main {
 	margin: 0.1 rem;
 }
 
+.darkButton {
+	color: white !important;
+	background-color: #121212d3 !important;
+}
+.darkButton:hover {
+	background-color: #121212 !important;
+}
+
 .navlink {
 	color: darkgrey;
 	text-decoration: none;

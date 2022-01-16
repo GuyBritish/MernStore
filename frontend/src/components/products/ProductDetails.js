@@ -4,7 +4,17 @@ import { Link, useParams } from "react-router-dom";
 import Rating from "../UI/Rating";
 import products from "../../products";
 
-import { Grid, Stack, Paper, Divider } from "@mui/material";
+import {
+	Grid,
+	Stack,
+	Paper,
+	Divider,
+	List,
+	ListItem,
+	Card,
+	Button,
+	Typography,
+} from "@mui/material";
 
 const ProductDetails = (props) => {
 	const params = useParams();
@@ -22,11 +32,11 @@ const ProductDetails = (props) => {
 					<img
 						src={prod.image}
 						alt={prod.name}
-						style={{ height: "100%", width: "100%" }}
+						style={{ height: "100%", width: "100%", padding: "2" }}
 					/>
 				</Grid>
 				<Grid item md={3}>
-					<Stack spacing={2} sx={{ pl: 4 }}>
+					<Stack spacing={2} sx={{ px: 2 }}>
 						<Paper elevation={0} sx={{ px: 2 }}>
 							<h3>{prod.name}</h3>
 						</Paper>
@@ -36,13 +46,58 @@ const ProductDetails = (props) => {
 						</Paper>
 						<Divider />
 						<Paper elevation={0} sx={{ px: 2 }}>
-							Price: ${prod.price}
+							<Typography fontSize="1rem">Price: ${prod.price}</Typography>
 						</Paper>
 						<Divider />
 						<Paper elevation={0} sx={{ px: 2 }}>
-							Description: {prod.description}
+							<Typography fontSize="1rem">Description: {prod.description}</Typography>
 						</Paper>
 					</Stack>
+				</Grid>
+				<Grid item md={3}>
+					<Card variant="outlined" sx={{ ml: 2 }}>
+						<List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+							<ListItem>
+								<Grid container>
+									<Grid item xs={6}>
+										Price:
+									</Grid>
+									<Grid item xs={6}>
+										${prod.price}
+									</Grid>
+								</Grid>
+							</ListItem>
+							<ListItem>
+								<Grid container>
+									<Grid item xs={6}>
+										Status:
+									</Grid>
+									<Grid item xs={6}>
+										{prod.countInStock > 0 ? "In Stock" : "Out Of Stock"}
+									</Grid>
+								</Grid>
+							</ListItem>
+							<ListItem>
+								<Grid container justifyContent="center">
+									<Button
+										sx={{
+											flexGrow: 1,
+											mx: 1,
+											display: "block",
+											color: "inherit",
+											backgroundColor: "inherit",
+										}}
+										className="darkButton"
+										variant="contained"
+										disableElevation
+										disabled={prod.countInStock === 0}
+									>
+										Add To Cart
+									</Button>
+								</Grid>
+							</ListItem>
+						</List>
+					</Card>
 				</Grid>
 			</Grid>
 		</div>
