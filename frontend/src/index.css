@@ -5,3 +5,15 @@ main {
 .rating span {
 	margin: 0.1 rem;
 }
+
+.navlink {
+	color: darkgrey;
+	text-decoration: none;
+}
+.navlink:hover {
+	color: white;
+}
+
+.linkActive {
+	color: white;
+}

@@ -10,6 +10,7 @@ import {
 	createTheme,
 	ThemeProvider,
 } from "@mui/material";
+import { Link, NavLink } from "react-router-dom";
 
 const darkTheme = createTheme({
 	palette: {
@@ -28,18 +29,28 @@ const Header = () => {
 								variant="h6"
 								noWrap
 								component="div"
+								to="/"
 								sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
 							>
-								MERN STORE
+								<Link
+									to="/"
+									style={{ color: "inherit", textDecoration: "inherit" }}
+								>
+									MERN STORE
+								</Link>
 							</Typography>
-
 							<Typography
 								variant="h6"
 								noWrap
 								component="div"
 								sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
 							>
-								MERN STORE
+								<Link
+									to="/"
+									style={{ color: "inherit", textDecoration: "inherit" }}
+								>
+									MERN STORE
+								</Link>
 							</Typography>
 							<Box
 								sx={{
@@ -48,12 +59,26 @@ const Header = () => {
 									ml: "auto",
 								}}
 							>
-								<Button sx={{ my: 2, color: "white", display: "block" }}>
-									<i className="fas fa-shopping-cart" /> Cart
-								</Button>
-								<Button sx={{ my: 2, color: "white", display: "block" }}>
-									<i className="fas fa-user" /> Sign In
-								</Button>
+								<NavLink
+									to="/cart"
+									className={(nav) =>
+										nav.isActive ? "navlink linkActive" : "navlink"
+									}
+								>
+									<Button sx={{ my: 2, color: "inherit", display: "block" }}>
+										<i className="fas fa-shopping-cart" /> Cart
+									</Button>
+								</NavLink>
+								<NavLink
+									to="/login"
+									className={(nav) =>
+										nav.isActive ? "navlink linkActive" : "navlink"
+									}
+								>
+									<Button sx={{ my: 2, color: "inherit", display: "block" }}>
+										<i className="fas fa-user" /> Sign In
+									</Button>
+								</NavLink>
 							</Box>
 						</Toolbar>
 					</Container>
