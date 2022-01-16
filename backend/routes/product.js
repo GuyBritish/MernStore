@@ -9,6 +9,8 @@ const control = require("../controllers/productController");
 
 router.get("/", catchAsync(control.getProducts));
 
+router.get("/:id", catchAsync(control.getOneProduct));
+
 /* -------------------------------------------------------------------------- */
 
 module.exports = router;

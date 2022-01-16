@@ -3,6 +3,15 @@ const getProducts = async (req, res) => {
 	res.json(products);
 };
 
+const getOneProduct = async (req, res) => {
+	const { id } = req.params;
+	const products = require("../products");
+	const product = products.find((prod) => {
+		return prod._id === id;
+	});
+	res.json(product);
+};
+
 /* -------------------------------------------------------------------------- */
 
-module.exports = { getProducts };
+module.exports = { getProducts, getOneProduct };
