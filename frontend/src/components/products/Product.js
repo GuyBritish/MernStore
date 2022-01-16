@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Rating from "../UI/Rating";
 
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 const Product = (props) => {
 	const prod = props.product;
@@ -13,7 +13,7 @@ const Product = (props) => {
 				<CardMedia component="img" alt={`${prod.name} image`} image={`${prod.image}`} />
 			</Link>
 			<CardContent>
-				<Link to={`/products/${prod._id}`} style={{ textDecoration: "none" }}>
+				<Link to={`/products/${prod._id}`} className="cardlink">
 					<Typography gutterBottom component="div" style={{ fontWeight: 500 }}>
 						{prod.name}
 					</Typography>

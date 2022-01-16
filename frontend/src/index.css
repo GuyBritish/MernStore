@@ -17,3 +17,10 @@ main {
 .linkActive {
 	color: white;
 }
+
+.cardlink {
+	text-decoration: none;
+}
+.cardlink:hover {
+	text-decoration: underline;
+}
