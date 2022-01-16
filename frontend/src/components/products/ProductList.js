@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import Product from "./Product";
 
 import { Grid } from "@mui/material";
 
-import products from "../../products";
+const axios = require("axios");
 
 const ProductList = () => {
+	const [products, setProducts] = useState([]);
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			const options = {
+				url: "/api/products",
+			};
+			const resp = await axios(options);
+			setProducts(resp.data);
+		};
+
+		fetchProducts();
+	}, []);
+
 	return (
 		<React.Fragment>
 			<h1>Latest Products</h1>
