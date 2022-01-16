@@ -13,14 +13,16 @@ const Product = (props) => {
 			</a>
 			<CardContent>
 				<a href={`/products/${prod._id}`} style={{ textDecoration: "none" }}>
-					<Typography gutterBottom variant="strong" component="div" color="text.primary">
+					<Typography gutterBottom component="div" style={{ fontWeight: 500 }}>
 						{prod.name}
 					</Typography>
 				</a>
 				<div className="my-3">
 					<Rating rating={prod.rating} text={`${prod.numReviews} reviews`} />
 				</div>
-				<Typography variant="h4">${prod.price}</Typography>
+				<Typography variant="h5" style={{ fontWeight: 500 }}>
+					${prod.price}
+				</Typography>
 			</CardContent>
 		</Card>
 	);
