@@ -1,5 +1,7 @@
 import React from "react";
 
+import Rating from "../UI/Rating";
+
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 const Product = (props) => {
@@ -16,9 +18,7 @@ const Product = (props) => {
 					</Typography>
 				</a>
 				<div className="my-3">
-					<Typography variant="body2">
-						{prod.rating} from {prod.numReviews} reviews
-					</Typography>
+					<Rating rating={prod.rating} text={`${prod.numReviews} reviews`} />
 				</div>
 				<Typography variant="h4">${prod.price}</Typography>
 			</CardContent>
