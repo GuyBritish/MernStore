@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import Rating from "../UI/Rating";
-import products from "../../products";
 
 import {
 	Grid,
@@ -16,11 +15,23 @@ import {
 	Typography,
 } from "@mui/material";
 
+const axios = require("axios");
+
 const ProductDetails = (props) => {
 	const params = useParams();
-	const prod = products.find((prod) => {
-		return prod._id === params.id;
-	});
+	const [prod, setProd] = useState({});
+
+	useEffect(() => {
+		const fetchProduct = async () => {
+			const options = {
+				url: `/api/products/${params.id}`,
+			};
+			const resp = await axios(options);
+			setProd(resp.data);
+		};
+
+		fetchProduct();
+	}, [params.id]);
 
 	return (
 		<div>
