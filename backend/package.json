@@ -1,0 +1,23 @@
+{
+	"name": "backend",
+	"version": "1.0.0",
+	"description": "Mern Store project backend",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nodemon index.js",
+		"start": "node index.js",
+		"test": "mocha --recursive --exit -r dotenv/config"
+	},
+	"keywords": [
+		"mernstore",
+		"backend",
+		"api"
+	],
+	"author": "Khai Bui",
+	"license": "MIT",
+	"dependencies": {
+		"dotenv": "^12.0.4",
+		"express": "^4.17.2",
+		"mocha": "^9.1.4"
+	}
+}
