@@ -1,0 +1,28 @@
+{
+	"name": "mernstore",
+	"version": "1.0.0",
+	"description": "The Mern Store eCommerce web application project.",
+	"main": "index.js",
+	"scripts": {
+		"server": "nodemon ./backend/index.js",
+		"client": "npm start --prefix ./frontend",
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/GuyBritish/MernStore.git"
+	},
+	"keywords": [
+		"mernstore"
+	],
+	"author": "Khai Bui",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/GuyBritish/MernStore/issues"
+	},
+	"homepage": "https://github.com/GuyBritish/MernStore#readme",
+	"devDependencies": {
+		"concurrently": "^7.0.0"
+	}
+}
