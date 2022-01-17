@@ -7,6 +7,11 @@ const path = require("path");
 
 /* -------------------------------------------------------------------------- */
 
+const connectDB = require("./config/database");
+connectDB();
+
+/* -------------------------------------------------------------------------- */
+
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
