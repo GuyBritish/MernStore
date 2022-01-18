@@ -1,15 +1,19 @@
+const Product = require("../models/productModel");
+
 const getProducts = async (req, res) => {
-	const products = require("../data/products");
+	const products = await Product.find({});
 	res.json(products);
 };
 
 const getOneProduct = async (req, res) => {
 	const { id } = req.params;
-	const products = require("../data/products");
-	const product = products.find((prod) => {
-		return prod._id === id;
-	});
-	res.json(product);
+	const product = await Product.findById(id);
+
+	if (product) {
+		res.json(product);
+	} else {
+		res.status(404).json({ message: "Product not found" });
+	}
 };
 
 /* -------------------------------------------------------------------------- */
