@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-import { ReviewSchema } from "./reviewModel";
-
 const OrderSchema = new mongoose.Schema(
 	{
 		user: {
@@ -73,7 +71,7 @@ const OrderSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-const Order = mongoose.model("Product", ProductSchema);
+const Order = mongoose.model("Order", OrderSchema);
 
 /* -------------------------------------------------------------------------- */
 
