@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-import { ReviewSchema } from "./reviewModel";
+const { ReviewSchema } = require("./reviewModel");
 
 const ProductSchema = new mongoose.Schema(
 	{
