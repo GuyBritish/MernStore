@@ -5,6 +5,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import ProductList from "./components/products/ProductList";
 import ProductDetails from "./components/products/ProductDetails";
+import Cart from "./components/cart/Cart";
 
 import { Container } from "@mui/material";
 
@@ -17,6 +18,8 @@ function App() {
 					<Routes>
 						<Route path="/" element={<ProductList />} />
 						<Route path="/products/:id" element={<ProductDetails />} />
+						<Route path="/cart/" element={<Cart />} />
+						<Route path="/cart/:id" element={<Cart />} />
 					</Routes>
 				</Container>
 			</main>
