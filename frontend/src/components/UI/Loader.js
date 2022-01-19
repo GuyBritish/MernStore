@@ -6,7 +6,7 @@ const Loader = () => {
 	return (
 		<React.Fragment>
 			<CircularProgress sx={{ width: 100, height: 100, margin: "auto", display: "block" }} />;
-			<span class="sr-only">Loading...</span>
+			<span className="sr-only">Loading...</span>
 		</React.Fragment>
 	);
 };
