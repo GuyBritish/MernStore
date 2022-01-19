@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { listProductDetails } from "../../actions/productActions";
@@ -27,6 +27,7 @@ import {
 const ProductDetails = (props) => {
 	const params = useParams();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const {
 		loading,
@@ -41,6 +42,10 @@ const ProductDetails = (props) => {
 	useEffect(() => {
 		dispatch(listProductDetails(params.id));
 	}, [dispatch, params.id]);
+
+	const addToCartHandler = () => {
+		navigate(`/cart/${params.id}?qty=${qty}`);
+	};
 
 	return (
 		<div>
@@ -155,6 +160,7 @@ const ProductDetails = (props) => {
 											variant="contained"
 											disableElevation
 											disabled={prod.countInStock === 0}
+											onClick={addToCartHandler}
 										>
 											Add To Cart
 										</Button>
