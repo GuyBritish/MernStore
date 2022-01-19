@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,6 +18,10 @@ import {
 	Card,
 	Button,
 	Typography,
+	FormControl,
+	Select,
+	MenuItem,
+	InputLabel,
 } from "@mui/material";
 
 const ProductDetails = (props) => {
@@ -31,6 +35,8 @@ const ProductDetails = (props) => {
 	} = useSelector((state) => {
 		return state.productDetails;
 	});
+
+	const [qty, setQty] = useState(0);
 
 	useEffect(() => {
 		dispatch(listProductDetails(params.id));
@@ -100,6 +106,41 @@ const ProductDetails = (props) => {
 										</Grid>
 									</Grid>
 								</ListItem>
+								{prod.countInStock > 0 && (
+									<ListItem>
+										<Grid container>
+											<Grid item xs={6}>
+												Quantity:
+											</Grid>
+											<Grid item xs={6}>
+												<FormControl fullWidth>
+													<InputLabel id="qty-select-label">
+														Quantity
+													</InputLabel>
+													<Select
+														labelId="qty-select-label"
+														id="qty-select-label"
+														value={qty}
+														label="Quantity"
+														onChange={(event) => {
+															setQty(event.target.value);
+														}}
+													>
+														{[...Array(prod.countInStock).keys()].map(
+															(x) => {
+																return (
+																	<MenuItem value={x + 1}>
+																		{x + 1}
+																	</MenuItem>
+																);
+															}
+														)}
+													</Select>
+												</FormControl>
+											</Grid>
+										</Grid>
+									</ListItem>
+								)}
 								<ListItem>
 									<Grid container justifyContent="center">
 										<Button
