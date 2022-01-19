@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../../actions/productActions";
 
 import Product from "./Product";
+import Loader from "../UI/Loader";
+import AlertMessage from "../UI/AlertMessage";
 
 import { Grid } from "@mui/material";
 
@@ -21,9 +23,9 @@ const ProductList = () => {
 		<React.Fragment>
 			<h1>Latest Products</h1>
 			{loading ? (
-				<h2>Loading...</h2>
+				<Loader />
 			) : error ? (
-				<h3>{error}</h3>
+				<AlertMessage variant="error">{error}</AlertMessage>
 			) : (
 				<Grid container className="my-3" spacing={3}>
 					{products.map((prod) => {
