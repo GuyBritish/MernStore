@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { listProductDetails } from "../../actions/productActions";
+import { addToCart } from "../../actions/cartActions";
 
 import Rating from "../UI/Rating";
 import Loader from "../UI/Loader";
@@ -44,7 +45,8 @@ const ProductDetails = (props) => {
 	}, [dispatch, params.id]);
 
 	const addToCartHandler = () => {
-		navigate(`/cart/${params.id}?qty=${qty}`);
+		dispatch(addToCart(prod._id, qty));
+		navigate(`/cart`);
 	};
 
 	return (
