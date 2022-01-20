@@ -16,6 +16,7 @@ import {
 	Select,
 	MenuItem,
 	Button,
+	Typography,
 } from "@mui/material";
 
 const Cart = (props) => {
@@ -62,10 +63,17 @@ const Cart = (props) => {
 												/>
 											</Grid>
 											<Grid item md={3}>
-												<Link to={`/products/${item.id}`}>{item.name}</Link>
+												<Link
+													to={`/products/${item.id}`}
+													className="cardlink"
+												>
+													<Typography>{item.name}</Typography>
+												</Link>
 											</Grid>
-											<Grid item md={2}>
-												${item.price}
+											<Grid item md={2} textAlign={"center"}>
+												<Typography fontSize={"1.15rem"}>
+													${item.price}
+												</Typography>
 											</Grid>
 											<Grid item md={2} sx={{ m: "auto" }}>
 												<FormControl fullWidth>
