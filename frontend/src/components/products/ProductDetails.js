@@ -134,7 +134,10 @@ const ProductDetails = (props) => {
 														{[...Array(prod.countInStock).keys()].map(
 															(x) => {
 																return (
-																	<MenuItem value={x + 1}>
+																	<MenuItem
+																		key={x + 1}
+																		value={x + 1}
+																	>
 																		{x + 1}
 																	</MenuItem>
 																);
