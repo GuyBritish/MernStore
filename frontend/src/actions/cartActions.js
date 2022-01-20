@@ -12,7 +12,7 @@ export const addToCart = (id, qty) => {
 		dispatch({
 			type: CART_ADD_ITEM,
 			payload: {
-				product: resp.data._id,
+				id: resp.data._id,
 				name: resp.data.name,
 				image: resp.data.image,
 				price: resp.data.price,
