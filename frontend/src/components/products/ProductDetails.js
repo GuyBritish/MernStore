@@ -37,7 +37,7 @@ const ProductDetails = (props) => {
 		return state.productDetails;
 	});
 
-	const [qty, setQty] = useState(0);
+	const [qty, setQty] = useState(1);
 
 	useEffect(() => {
 		dispatch(listProductDetails(params.id));
