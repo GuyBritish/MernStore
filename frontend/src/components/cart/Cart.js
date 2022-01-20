@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addToCart } from "../../actions/cartActions";
+import { addToCart, removeFromCart } from "../../actions/cartActions";
 
 import AlertMessage from "../UI/AlertMessage";
 
@@ -22,7 +22,6 @@ import {
 
 const Cart = (props) => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const cart = useSelector((state) => {
 		return state.cart;
@@ -30,11 +29,10 @@ const Cart = (props) => {
 
 	const addToCartHandler = (id, quantity) => {
 		dispatch(addToCart(id, quantity));
-		navigate(`/cart`);
 	};
 
-	const removeFromCartHandler = () => {
-		console.log("remove");
+	const removeFromCartHandler = (id) => {
+		dispatch(removeFromCart(id));
 	};
 
 	const checkoutHandler = () => {
