@@ -17,6 +17,7 @@ import {
 	MenuItem,
 	Button,
 	Typography,
+	Card,
 } from "@mui/material";
 
 const Cart = (props) => {
@@ -34,6 +35,10 @@ const Cart = (props) => {
 
 	const removeFromCartHandler = () => {
 		console.log("remove");
+	};
+
+	const checkoutHandler = () => {
+		console.log("checkout");
 	};
 
 	return (
@@ -126,8 +131,52 @@ const Cart = (props) => {
 					</List>
 				)}
 			</Grid>
-			<Grid item md={2}></Grid>
-			<Grid item md={2}></Grid>
+			<Grid item md={4}>
+				<Card variant="outlined" sx={{ ml: 2 }}>
+					<List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+						<ListItem>
+							<h3>
+								Subtotal (
+								{cart.cartItems.reduce((sum, item) => {
+									return sum + item.qty;
+								}, 0)}
+								) items
+							</h3>
+						</ListItem>
+						<ListItem>
+							<h5>
+								$
+								{cart.cartItems
+									.reduce((sum, item) => {
+										return sum + item.price * item.qty;
+									}, 0)
+									.toFixed(2)}
+							</h5>
+						</ListItem>
+						<Divider />
+						<ListItem>
+							<Grid container justifyContent="center">
+								<Button
+									sx={{
+										flexGrow: 1,
+										mx: 1,
+										display: "block",
+										color: "inherit",
+										backgroundColor: "inherit",
+									}}
+									className="darkButton"
+									variant="contained"
+									disableElevation
+									disabled={cart.cartItems.length === 0}
+									onClick={checkoutHandler}
+								>
+									Proceed To Checkout
+								</Button>
+							</Grid>
+						</ListItem>
+					</List>
+				</Card>
+			</Grid>
 		</Grid>
 	);
 };
