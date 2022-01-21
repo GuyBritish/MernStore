@@ -4,7 +4,7 @@
 	"description": "The Mern Store eCommerce web application project.",
 	"main": "index.js",
 	"scripts": {
-		"server": "nodemon ./backend/index.js",
+		"server": "cd ./backend && nodemon index.js && cd ..",
 		"client": "npm start --prefix ./frontend",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
 		"test": "echo \"Error: no test specified\" && exit 1",
