@@ -8,6 +8,8 @@ const control = require("../controllers/userController");
 
 /* -------------------------------------------------------------------------- */
 
+router.post("/", catchAsync(control.addUser));
+
 router.post("/login", catchAsync(control.authUser));
 
 router.get("/profile", isAuth, catchAsync(control.getProfile));
