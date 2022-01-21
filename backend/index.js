@@ -22,12 +22,14 @@ app.use(express.urlencoded({ extended: true }));
 /* -------------------------------------------------------------------------- */
 
 const productRoutes = require("./routes/product");
+const userRoutes = require("./routes/user");
 
 app.get("/", (req, res) => {
 	res.send("API is running...");
 });
 
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 app.all("*", (req, res, next) => {
 	const err = new Error(`Not Found - ${req.originalUrl}`);
