@@ -1,5 +1,7 @@
 const User = require("../models/userModel");
 
+const generateToken = require("../utils/generateToken");
+
 const authUser = async (req, res) => {
 	const { email, password } = req.body;
 
@@ -10,7 +12,7 @@ const authUser = async (req, res) => {
 			_id: user._id,
 			name: user.name,
 			isAdmin: user.isAdmin,
-			token: null,
+			token: generateToken(user._id),
 		});
 	} else {
 		res.status(401);
