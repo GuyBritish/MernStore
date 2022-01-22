@@ -1,4 +1,7 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { logout } from "../../actions/userActions";
 
 import {
 	AppBar,
@@ -9,8 +12,10 @@ import {
 	Button,
 	createTheme,
 	ThemeProvider,
+	Menu,
+	MenuItem,
 } from "@mui/material";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, resolvePath, useNavigate } from "react-router-dom";
 
 const darkTheme = createTheme({
 	palette: {
@@ -19,6 +24,34 @@ const darkTheme = createTheme({
 });
 
 const Header = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+	const { userInfo } = useSelector((state) => {
+		return state.userAuth;
+	});
+
+	const handleOpenUserMenu = (event) => {
+		event.preventDefault();
+		setAnchorElUser(event.currentTarget);
+	};
+
+	const handleCloseUserMenu = () => {
+		setAnchorElUser(null);
+	};
+
+	const handleProfileMenu = () => {
+		handleCloseUserMenu();
+		navigate(resolvePath("/users/profile"));
+	};
+
+	const handleLogoutMenu = () => {
+		handleCloseUserMenu();
+		dispatch(logout());
+		navigate(resolvePath("/"), { replace: true });
+	};
+
 	return (
 		<header>
 			<ThemeProvider theme={darkTheme}>
@@ -69,16 +102,57 @@ const Header = () => {
 										<i className="fas fa-shopping-cart" /> Cart
 									</Button>
 								</NavLink>
-								<NavLink
-									to="/login"
-									className={(nav) =>
-										nav.isActive ? "navlink linkActive" : "navlink"
-									}
-								>
-									<Button sx={{ my: 2, color: "inherit", display: "block" }}>
-										<i className="fas fa-user" /> Sign In
-									</Button>
-								</NavLink>
+								{userInfo ? (
+									<React.Fragment>
+										<NavLink
+											to="/users/profile"
+											className={(nav) =>
+												nav.isActive ? "navlink linkActive" : "navlink"
+											}
+										>
+											<Button
+												sx={{ my: 2, color: "inherit", display: "block" }}
+												onClick={handleOpenUserMenu}
+											>
+												<i className="fas fa-user" /> {userInfo.name}
+											</Button>
+										</NavLink>
+										<Menu
+											sx={{ mt: "45px" }}
+											id="menu-appbar"
+											anchorEl={anchorElUser}
+											anchorOrigin={{
+												vertical: "top",
+												horizontal: "right",
+											}}
+											keepMounted
+											transformOrigin={{
+												vertical: "top",
+												horizontal: "right",
+											}}
+											open={Boolean(anchorElUser)}
+											onClose={handleCloseUserMenu}
+										>
+											<MenuItem key="profile" onClick={handleProfileMenu}>
+												<Typography textAlign="center">Profile</Typography>
+											</MenuItem>
+											<MenuItem key="logout" onClick={handleLogoutMenu}>
+												<Typography textAlign="center">Logout</Typography>
+											</MenuItem>
+										</Menu>
+									</React.Fragment>
+								) : (
+									<NavLink
+										to="/login"
+										className={(nav) =>
+											nav.isActive ? "navlink linkActive" : "navlink"
+										}
+									>
+										<Button sx={{ my: 2, color: "inherit", display: "block" }}>
+											<i className="fas fa-user" /> Sign In
+										</Button>
+									</NavLink>
+								)}
 							</Box>
 						</Toolbar>
 					</Container>
