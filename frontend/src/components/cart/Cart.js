@@ -117,7 +117,7 @@ const Cart = (props) => {
 													onClick={() => removeFromCartHandler(item.id)}
 													sx={{ color: "black" }}
 												>
-													<i className="fas fa-trash"></i>
+													<i className="fas fa-trash fa-lg"></i>
 												</Button>
 											</Grid>
 										</Grid>
