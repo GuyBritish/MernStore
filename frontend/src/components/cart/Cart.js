@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addToCart, removeFromCart } from "../../actions/cartActions";
@@ -22,6 +22,7 @@ import {
 
 const Cart = (props) => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const cart = useSelector((state) => {
 		return state.cart;
@@ -36,7 +37,7 @@ const Cart = (props) => {
 	};
 
 	const checkoutHandler = () => {
-		console.log("checkout");
+		navigate("/login?redirect=shipping");
 	};
 
 	return (
