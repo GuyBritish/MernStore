@@ -8,6 +8,7 @@ import ProductDetails from "./components/products/ProductDetails";
 import Cart from "./components/cart/Cart";
 
 import { Container } from "@mui/material";
+import LoginForm from "./components/users/LoginForm";
 
 function App() {
 	return (
@@ -18,8 +19,9 @@ function App() {
 					<Routes>
 						<Route path="/" element={<ProductList />} />
 						<Route path="/products/:id" element={<ProductDetails />} />
-						<Route path="/cart/" element={<Cart />} />
+						<Route path="/cart" element={<Cart />} />
 						<Route path="/cart/:id" element={<Cart />} />
+						<Route path="/login" element={<LoginForm />} />
 					</Routes>
 				</Container>
 			</main>
