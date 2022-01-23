@@ -10,6 +10,7 @@ import LoginForm from "./components/users/LoginForm";
 import RegisterForm from "./components/users/RegisterForm";
 
 import { Container } from "@mui/material";
+import Profile from "./components/users/Profile";
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 						<Route path="/cart/:id" element={<Cart />} />
 						<Route path="/login" element={<LoginForm />} />
 						<Route path="/register" element={<RegisterForm />} />
+						<Route path="/profile" element={<Profile />} />
 					</Routes>
 				</Container>
 			</main>
