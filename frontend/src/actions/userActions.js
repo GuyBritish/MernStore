@@ -11,6 +11,9 @@ import {
 	USER_DETAILS_REQUEST,
 	USER_DETAILS_SUCCESS,
 	USER_DETAILS_FAIL,
+	USER_UPDATE_REQUEST,
+	USER_UPDATE_SUCCESS,
+	USER_UPDATE_FAIL,
 } from "../constants/userConst";
 
 export const login = (email, password) => {
@@ -126,6 +129,48 @@ export const getUser = (id) => {
 		} catch (err) {
 			dispatch({
 				type: USER_DETAILS_FAIL,
+				payload:
+					err.response && err.response.data.message
+						? err.response.data.message
+						: err.message,
+			});
+		}
+	};
+};
+
+export const updateProfile = (user) => {
+	return async (dispatch, getState) => {
+		try {
+			dispatch({ type: USER_UPDATE_REQUEST });
+
+			const {
+				userAuth: { userInfo },
+			} = getState();
+
+			const options = {
+				url: "/api/users/profile",
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+				data: {
+					_id: user.id,
+					name: user.name,
+					email: user.email,
+					password: user.password,
+				},
+			};
+
+			const resp = await axios(options);
+
+			dispatch({
+				type: USER_UPDATE_SUCCESS,
+				payload: resp.data,
+			});
+		} catch (err) {
+			dispatch({
+				type: USER_UPDATE_FAIL,
 				payload:
 					err.response && err.response.data.message
 						? err.response.data.message
