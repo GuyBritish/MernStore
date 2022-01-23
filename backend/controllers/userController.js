@@ -86,8 +86,6 @@ const updateProfile = async (req, res) => {
 		user.email = req.body.email || user.email;
 		user.password = req.body.password || user.password;
 
-		console.log(req.body);
-
 		const updatedUser = await user.save();
 
 		res.json({
