@@ -82,7 +82,7 @@ const RegisterForm = () => {
 						}}
 					/>
 				</FormGroup>
-				<FormGroup className="my-2">
+				<FormGroup className="my-3">
 					<InputLabel className="mb-2">
 						<strong>Password</strong>
 					</InputLabel>
@@ -99,7 +99,7 @@ const RegisterForm = () => {
 						}}
 					/>
 				</FormGroup>
-				<FormGroup className="my-2">
+				<FormGroup className="my-3">
 					<InputLabel className="mb-2">
 						<strong>Confirm Password</strong>
 					</InputLabel>
