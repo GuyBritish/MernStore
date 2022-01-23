@@ -6,9 +6,10 @@ import Footer from "./components/layout/Footer";
 import ProductList from "./components/products/ProductList";
 import ProductDetails from "./components/products/ProductDetails";
 import Cart from "./components/cart/Cart";
+import LoginForm from "./components/users/LoginForm";
+import RegisterForm from "./components/users/RegisterForm";
 
 import { Container } from "@mui/material";
-import LoginForm from "./components/users/LoginForm";
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 						<Route path="/cart" element={<Cart />} />
 						<Route path="/cart/:id" element={<Cart />} />
 						<Route path="/login" element={<LoginForm />} />
+						<Route path="/register" element={<RegisterForm />} />
 					</Routes>
 				</Container>
 			</main>
