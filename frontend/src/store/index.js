@@ -4,7 +4,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import { productDetailsReducer, productListReducer } from "../reducers/productReducer";
 import { cartReducer } from "../reducers/cartReducer";
-import { userRegisterReducer, userAuthReducer, userDetailsReducer } from "../reducers/userReducer";
+import {
+	userRegisterReducer,
+	userAuthReducer,
+	userDetailsReducer,
+	userUpdateReducer,
+} from "../reducers/userReducer";
 
 /* -------------------------------------------------------------------------- */
 
@@ -28,6 +33,7 @@ const reducer = combineReducers({
 	userAuth: userAuthReducer,
 	userRegister: userRegisterReducer,
 	userDetails: userDetailsReducer,
+	userUpdate: userUpdateReducer,
 });
 
 const middleware = [thunk];
