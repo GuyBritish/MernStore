@@ -95,7 +95,6 @@ const updateProfile = async (req, res) => {
 			isAdmin: updatedUser.isAdmin,
 			token: generateToken(updatedUser._id),
 		});
-		console.log(updatedUser);
 	} else {
 		res.status(404);
 		throw new Error("User not found");
