@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { resolvePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getUser } from "../../actions/userActions";
+import { getUser, updateProfile } from "../../actions/userActions";
 
 import AlertMessage from "../UI/AlertMessage";
 import Loader from "../UI/Loader";
 import { Button, FormGroup, Grid, FilledInput, InputLabel } from "@mui/material";
+
+import { USER_UPDATE_RESET } from "../../constants/userConst";
 
 const Profile = () => {
 	const navigate = useNavigate();
@@ -26,6 +28,10 @@ const Profile = () => {
 		return state.userAuth;
 	});
 
+	const { success } = useSelector((state) => {
+		return state.userUpdate;
+	});
+
 	useEffect(() => {
 		if (!userInfo) {
 			navigate(resolvePath("/login"), { replace: true });
@@ -33,6 +39,7 @@ const Profile = () => {
 			if (!user.name) {
 				dispatch(getUser("profile"));
 			} else {
+				dispatch({ type: USER_UPDATE_RESET });
 				setName(user.name);
 				setEmail(user.email);
 			}
@@ -44,7 +51,14 @@ const Profile = () => {
 		if (password !== confirmPassword) {
 			setMessage("Passwords do not match");
 		} else {
-			// DISPATCH UPDATE PROFILE
+			dispatch(
+				updateProfile({
+					id: user._id,
+					name,
+					email,
+					password,
+				})
+			);
 		}
 	};
 
@@ -54,6 +68,9 @@ const Profile = () => {
 				<h2>User Profile</h2>
 				{message && <AlertMessage variant="error">{message}</AlertMessage>}
 				{error && <AlertMessage variant="error">{error}</AlertMessage>}
+				{success && (
+					<AlertMessage variant="success">Profile successfully updated</AlertMessage>
+				)}
 				{loading && <Loader />}
 				<form onSubmit={updateProfileHandler} className="mt-3">
 					<FormGroup className="my-3">
@@ -90,7 +107,7 @@ const Profile = () => {
 							}}
 						/>
 					</FormGroup>
-					<FormGroup className="my-2">
+					<FormGroup className="my-3">
 						<InputLabel className="mb-2">
 							<strong>Password</strong>
 						</InputLabel>
@@ -107,7 +124,7 @@ const Profile = () => {
 							}}
 						/>
 					</FormGroup>
-					<FormGroup className="my-2">
+					<FormGroup className="my-3">
 						<InputLabel className="mb-2">
 							<strong>Confirm Password</strong>
 						</InputLabel>
