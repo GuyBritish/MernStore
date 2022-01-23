@@ -69,6 +69,40 @@ const getProfile = async (req, res) => {
 	}
 };
 
+const updateProfile = async (req, res) => {
+	const user = await User.findById(req.user._id);
+
+	if (req.body.email && req.body.email !== user.email) {
+		const emailUser = await User.findOne({ email: req.body.email });
+
+		if (emailUser) {
+			res.status(400);
+			throw new Error("User with this email address already exists");
+		}
+	}
+
+	if (user) {
+		user.name = req.body.name || user.name;
+		user.email = req.body.email || user.email;
+		user.password = req.body.password || user.password;
+
+		console.log(req.body);
+
+		const updatedUser = await user.save();
+
+		res.json({
+			_id: updatedUser._id,
+			name: updatedUser.name,
+			email: updatedUser.email,
+			isAdmin: updatedUser.isAdmin,
+			token: generateToken(updatedUser._id),
+		});
+	} else {
+		res.status(404);
+		throw new Error("User not found");
+	}
+};
+
 /* -------------------------------------------------------------------------- */
 
-module.exports = { addUser, authUser, getProfile };
+module.exports = { addUser, authUser, getProfile, updateProfile };

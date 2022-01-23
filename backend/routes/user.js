@@ -14,6 +14,8 @@ router.post("/login", catchAsync(control.authUser));
 
 router.get("/profile", isAuth, catchAsync(control.getProfile));
 
+router.put("/profile", isAuth, catchAsync(control.updateProfile));
+
 /* -------------------------------------------------------------------------- */
 
 module.exports = router;
