@@ -20,7 +20,7 @@ const addUser = async (req, res) => {
 		password,
 	});
 
-	if (newuser) {
+	if (newUser) {
 		res.status(201).json({
 			_id: user._id,
 			name: user.name,
