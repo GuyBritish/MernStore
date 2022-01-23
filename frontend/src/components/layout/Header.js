@@ -43,7 +43,7 @@ const Header = () => {
 
 	const handleProfileMenu = () => {
 		handleCloseUserMenu();
-		navigate(resolvePath("/users/profile"));
+		navigate(resolvePath("/profile"));
 	};
 
 	const handleLogoutMenu = () => {
@@ -105,7 +105,7 @@ const Header = () => {
 								{userInfo ? (
 									<React.Fragment>
 										<NavLink
-											to="/users/profile"
+											to="/profile"
 											className={(nav) =>
 												nav.isActive ? "navlink linkActive" : "navlink"
 											}
