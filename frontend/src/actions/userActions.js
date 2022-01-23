@@ -8,6 +8,9 @@ import {
 	USER_REGISTER_SUCCESS,
 	USER_REGISTER_FAIL,
 	USER_LOGOUT,
+	USER_DETAILS_REQUEST,
+	USER_DETAILS_SUCCESS,
+	USER_DETAILS_FAIL,
 } from "../constants/userConst";
 
 export const login = (email, password) => {
@@ -94,5 +97,40 @@ export const logout = () => {
 	return (dispatch) => {
 		localStorage.removeItem("userInfo");
 		dispatch({ type: USER_LOGOUT });
+	};
+};
+
+export const getUser = (id) => {
+	return async (dispatch, getState) => {
+		try {
+			dispatch({ type: USER_DETAILS_REQUEST });
+
+			const {
+				userAuth: { userInfo },
+			} = getState();
+
+			const options = {
+				url: `/api/users/${id}`,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			const resp = await axios(options);
+
+			dispatch({
+				type: USER_DETAILS_SUCCESS,
+				payload: resp.data,
+			});
+		} catch (err) {
+			dispatch({
+				type: USER_DETAILS_FAIL,
+				payload:
+					err.response && err.response.data.message
+						? err.response.data.message
+						: err.message,
+			});
+		}
 	};
 };
