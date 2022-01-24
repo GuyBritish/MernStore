@@ -31,4 +31,5 @@ main {
 }
 .cardlink:hover {
 	text-decoration: underline;
+	cursor: pointer;
 }
