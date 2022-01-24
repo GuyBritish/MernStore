@@ -6,7 +6,7 @@ import AlertMessage from "../UI/AlertMessage";
 
 import { savePaymentMethod } from "../../actions/cartActions";
 
-import { Grid, Link, List, ListItem, Typography, Divider } from "@mui/material";
+import { Grid, Link, List, ListItem, Typography, Divider, Card, Button } from "@mui/material";
 
 const Order = () => {
 	const dispatch = useDispatch();
@@ -15,6 +15,8 @@ const Order = () => {
 	const cartCtx = useSelector((state) => {
 		return state.cart;
 	});
+
+	const placeOrderHandler = () => {};
 
 	return (
 		<Grid container>
@@ -100,6 +102,76 @@ const Order = () => {
 						</div>
 					</ListItem>
 				</List>
+			</Grid>
+
+			<Grid item md={4}>
+				<Card variant="outlined" sx={{ ml: 2 }}>
+					<List sx={{ width: "100%", bgcolor: "background.paper", pb: 0 }}>
+						<ListItem divider sx={{ borderBottomWidth: 2, py: 2 }}>
+							<h2>Order Summary</h2>
+						</ListItem>
+						<ListItem divider sx={{ borderBottomWidth: 2, py: 2 }}>
+							<Grid container>
+								<Grid item md={6}>
+									Items:
+								</Grid>
+								<Grid item md={6}>
+									${cartCtx.itemsPrice}
+								</Grid>
+							</Grid>
+						</ListItem>
+						<ListItem divider sx={{ borderBottomWidth: 2, py: 2 }}>
+							<Grid container>
+								<Grid item md={6}>
+									Shipping:
+								</Grid>
+								<Grid item md={6}>
+									${cartCtx.shippingPrice}
+								</Grid>
+							</Grid>
+						</ListItem>
+						<ListItem divider sx={{ borderBottomWidth: 2, py: 2 }}>
+							<Grid container>
+								<Grid item md={6}>
+									Tax:
+								</Grid>
+								<Grid item md={6}>
+									${cartCtx.TaxPrice}
+								</Grid>
+							</Grid>
+						</ListItem>
+						<ListItem divider sx={{ borderBottomWidth: 2, py: 2 }}>
+							<Grid container>
+								<Grid item md={6}>
+									Total:
+								</Grid>
+								<Grid item md={6}>
+									${cartCtx.totalPrice}
+								</Grid>
+							</Grid>
+						</ListItem>
+						<ListItem divider sx={{ borderBottomWidth: 2, py: 2 }}>
+							<Grid container justifyContent="center">
+								<Button
+									sx={{
+										flexGrow: 1,
+										mx: 1,
+										display: "block",
+										color: "inherit",
+										backgroundColor: "inherit",
+									}}
+									className="darkButton"
+									variant="contained"
+									disableElevation
+									disabled={cartCtx.cartItems.length === 0}
+									onClick={placeOrderHandler}
+								>
+									Place Order
+								</Button>
+							</Grid>
+						</ListItem>
+					</List>
+				</Card>
 			</Grid>
 		</Grid>
 	);
