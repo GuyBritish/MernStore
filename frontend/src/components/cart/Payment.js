@@ -28,7 +28,7 @@ const Payment = () => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		dispatch(savePaymentMethod({ paymentMethod }));
+		dispatch(savePaymentMethod(paymentMethod));
 		navigate(resolvePath("/order"));
 	};
 
