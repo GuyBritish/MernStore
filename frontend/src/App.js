@@ -13,6 +13,7 @@ import { Container } from "@mui/material";
 import Profile from "./components/users/Profile";
 import Shipping from "./components/cart/Shipping";
 import Payment from "./components/cart/Payment";
+import Order from "./components/cart/Order";
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/shipping" element={<Shipping />} />
 						<Route path="/payment" element={<Payment />} />
+						<Route path="/order" element={<Order />} />
 					</Routes>
 				</Container>
 			</main>
