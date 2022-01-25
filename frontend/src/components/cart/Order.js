@@ -1,20 +1,25 @@
-import React, { useState } from "react";
-import { Link, resolvePath, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import AlertMessage from "../UI/AlertMessage";
-
-import { savePaymentMethod } from "../../actions/cartActions";
 
 import { Grid, List, ListItem, Typography, Divider, Card, Button } from "@mui/material";
 
 const Order = () => {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-
 	const cartCtx = useSelector((state) => {
 		return state.cart;
 	});
+
+	cartCtx.itemsPrice = cartCtx.cartItems.reduce((acc, item) => {
+		return acc + item.price * item.qty;
+	}, 0);
+
+	cartCtx.shippingPrice = cartCtx.itemsPrice > 100 ? 0.0 : 20.0;
+
+	cartCtx.taxPrice = 0.15 * cartCtx.itemsPrice;
+
+	cartCtx.totalPrice = cartCtx.itemsPrice + cartCtx.shippingPrice + cartCtx.taxPrice;
 
 	const placeOrderHandler = () => {};
 
@@ -116,7 +121,7 @@ const Order = () => {
 									Items:
 								</Grid>
 								<Grid item md={6}>
-									${cartCtx.itemsPrice}
+									${cartCtx.itemsPrice.toFixed(2)}
 								</Grid>
 							</Grid>
 						</ListItem>
@@ -126,7 +131,7 @@ const Order = () => {
 									Shipping:
 								</Grid>
 								<Grid item md={6}>
-									${cartCtx.shippingPrice}
+									${cartCtx.shippingPrice.toFixed(2)}
 								</Grid>
 							</Grid>
 						</ListItem>
@@ -136,7 +141,7 @@ const Order = () => {
 									Tax:
 								</Grid>
 								<Grid item md={6}>
-									${cartCtx.TaxPrice}
+									${cartCtx.taxPrice.toFixed(2)}
 								</Grid>
 							</Grid>
 						</ListItem>
@@ -146,7 +151,7 @@ const Order = () => {
 									Total:
 								</Grid>
 								<Grid item md={6}>
-									${cartCtx.totalPrice}
+									${cartCtx.totalPrice.toFixed(2)}
 								</Grid>
 							</Grid>
 						</ListItem>
