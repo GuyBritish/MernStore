@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { resolvePath, useNavigate } from "react-router-dom";
+import { Link, resolvePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import AlertMessage from "../UI/AlertMessage";
 
 import { savePaymentMethod } from "../../actions/cartActions";
 
-import { Grid, Link, List, ListItem, Typography, Divider, Card, Button } from "@mui/material";
+import { Grid, List, ListItem, Typography, Divider, Card, Button } from "@mui/material";
 
 const Order = () => {
 	const dispatch = useDispatch();
@@ -53,7 +53,7 @@ const Order = () => {
 								<List sx={{ width: "100%", bgcolor: "background.paper" }}>
 									{cartCtx.cartItems.map((item) => {
 										return (
-											<React.Fragment key={item._id}>
+											<React.Fragment key={item.id}>
 												<ListItem>
 													<Grid container>
 														<Grid item md={1}>
@@ -69,7 +69,7 @@ const Order = () => {
 														</Grid>
 														<Grid item ml={2} flexGrow={1}>
 															<Link
-																to={`/products/${item._id}`}
+																to={`/products/${item.id}`}
 																className="cardlink"
 																sx={{
 																	textDecoration: "none",
