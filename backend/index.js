@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const productRoutes = require("./routes/product");
 const userRoutes = require("./routes/user");
+const orderRoutes = require("./routes/order");
 
 app.get("/", (req, res) => {
 	res.send("API is running...");
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/order", orderRoutes);
 
 app.all("*", (req, res, next) => {
 	const err = new Error(`Not Found - ${req.originalUrl}`);
