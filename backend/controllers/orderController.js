@@ -1,4 +1,4 @@
-const Model = require("../models/orderModel");
+const Order = require("../models/orderModel");
 
 const addOrder = async (req, res) => {
 	// Needs backend verification
