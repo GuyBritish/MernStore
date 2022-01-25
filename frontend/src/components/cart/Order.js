@@ -1,12 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { createOrder } from "../../actions/orderActions";
 
 import AlertMessage from "../UI/AlertMessage";
 
 import { Grid, List, ListItem, Typography, Divider, Card, Button } from "@mui/material";
 
 const Order = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const cartCtx = useSelector((state) => {
 		return state.cart;
 	});
@@ -21,7 +26,29 @@ const Order = () => {
 
 	cartCtx.totalPrice = cartCtx.itemsPrice + cartCtx.shippingPrice + cartCtx.taxPrice;
 
-	const placeOrderHandler = () => {};
+	const { order, success, error } = useSelector((state) => {
+		return state.orderCreate;
+	});
+
+	useEffect(() => {
+		if (success) {
+			navigate(`/order/${order._id}`);
+		}
+	}, [success, navigate, order]);
+
+	const placeOrderHandler = () => {
+		dispatch(
+			createOrder({
+				items: cartCtx.cartItems,
+				shippingAddress: cartCtx.shippingAddress,
+				paymentMethod: cartCtx.paymentMethod,
+				itemsPrice: cartCtx.itemsPrice,
+				shippingPrice: cartCtx.shippingPrice,
+				taxPrice: cartCtx.taxPrice,
+				totalPrice: cartCtx.totalPrice,
+			})
+		);
+	};
 
 	return (
 		<Grid container>
@@ -155,6 +182,11 @@ const Order = () => {
 								</Grid>
 							</Grid>
 						</ListItem>
+						{error && (
+							<ListItem>
+								<AlertMessage>{error}</AlertMessage>
+							</ListItem>
+						)}
 						<ListItem divider sx={{ borderBottomWidth: 2, py: 2 }}>
 							<Grid container justifyContent="center">
 								<Button
