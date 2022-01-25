@@ -51,9 +51,9 @@ const Order = () => {
 								<AlertMessage variant="info">Your cart is empty</AlertMessage>
 							) : (
 								<List sx={{ width: "100%", bgcolor: "background.paper" }}>
-									{cartCtx.cartItems.map((item, index) => {
+									{cartCtx.cartItems.map((item) => {
 										return (
-											<React.Fragment key={index}>
+											<React.Fragment key={item._id}>
 												<ListItem>
 													<Grid container>
 														<Grid item md={1}>
