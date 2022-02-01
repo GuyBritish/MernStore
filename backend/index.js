@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/order", orderRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.all("*", (req, res, next) => {
 	const err = new Error(`Not Found - ${req.originalUrl}`);
