@@ -10,7 +10,7 @@ const control = require("../controllers/orderController");
 
 router.post("/", isAuth, catchAsync(control.addOrder));
 
-router.get("/:id", isAuth, catchAsync(control.getOrder));
+router.get("/:id", isAuth, catchAsync(control.getOrderById));
 
 /* -------------------------------------------------------------------------- */
 
