@@ -49,6 +49,15 @@ const OrderDetails = () => {
 											{order.shippingAddress.postalCode},{" "}
 											{order.shippingAddress.country}
 										</Typography>
+										{order.isDelivered ? (
+											<AlertMessage variant="success">
+												Delivered on {order.deliveredAt}
+											</AlertMessage>
+										) : (
+											<AlertMessage variant="warning">
+												Not yet delivered
+											</AlertMessage>
+										)}
 									</div>
 								</ListItem>
 								<Divider />
@@ -59,6 +68,15 @@ const OrderDetails = () => {
 											<strong>Method: </strong>
 											{order.paymentMethod}
 										</Typography>
+										{order.isPaid ? (
+											<AlertMessage variant="success">
+												Paid on {order.paidAt}
+											</AlertMessage>
+										) : (
+											<AlertMessage variant="warning">
+												Not yet paid
+											</AlertMessage>
+										)}
 									</div>
 								</ListItem>
 								<Divider />
