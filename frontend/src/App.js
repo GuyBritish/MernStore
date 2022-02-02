@@ -14,6 +14,7 @@ import Profile from "./components/users/Profile";
 import Shipping from "./components/cart/Shipping";
 import Payment from "./components/cart/Payment";
 import Order from "./components/cart/Order";
+import OrderDetails from "./components/cart/OrderDetails";
 
 function App() {
 	return (
@@ -32,6 +33,7 @@ function App() {
 						<Route path="/shipping" element={<Shipping />} />
 						<Route path="/payment" element={<Payment />} />
 						<Route path="/order" element={<Order />} />
+						<Route path="/order/:id" element={<OrderDetails />} />
 					</Routes>
 				</Container>
 			</main>
