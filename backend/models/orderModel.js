@@ -58,12 +58,12 @@ const OrderSchema = new mongoose.Schema(
 			required: true,
 		},
 		isPaid: {
-			type: String,
+			type: Boolean,
 			required: true,
 			default: false,
 		},
 		isDelivered: {
-			type: String,
+			type: Boolean,
 			required: true,
 			default: false,
 		},
