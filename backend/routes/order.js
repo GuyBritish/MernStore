@@ -12,6 +12,8 @@ router.post("/", isAuth, catchAsync(control.addOrder));
 
 router.get("/:id", isAuth, catchAsync(control.getOrderById));
 
+router.put("/:id/pay", isAuth, catchAsync(control.setOderPaid));
+
 /* -------------------------------------------------------------------------- */
 
 module.exports = router;
