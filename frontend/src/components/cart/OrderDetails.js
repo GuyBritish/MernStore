@@ -18,8 +18,10 @@ const OrderDetails = () => {
 	});
 
 	useEffect(() => {
-		dispatch(getOrderDetails(params.id));
-	}, [dispatch, params]);
+		if (!order || order._id !== params.id) {
+			dispatch(getOrderDetails(params.id));
+		}
+	}, [dispatch, params, order]);
 
 	return (
 		<React.Fragment>
