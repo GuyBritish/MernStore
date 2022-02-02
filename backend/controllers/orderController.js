@@ -17,13 +17,13 @@ const addOrder = async (req, res) => {
 		throw new Error("No order items");
 	} else {
 		const order = new Order({
-			items,
+			orderItems: items,
 			user: req.user._id,
 			shippingAddress,
 			paymentMethod,
 			itemsPrice,
 			taxPrice,
-			shippingAddress,
+			shippingPrice,
 			totalPrice,
 		});
 
