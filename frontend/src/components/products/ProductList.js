@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../../actions/productActions";
 
 import Product from "./Product";
-import Loader from "../UI/Loader";
-import AlertMessage from "../UI/AlertMessage";
+import Loader from "../Interface/Loader";
+import AlertMessage from "../Interface/AlertMessage";
 
 import { Grid } from "@mui/material";
 

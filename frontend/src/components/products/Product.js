@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Rating from "../UI/Rating";
+import Rating from "../Interface/Rating";
 
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 

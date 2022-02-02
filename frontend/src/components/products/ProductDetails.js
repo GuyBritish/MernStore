@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../../actions/productActions";
 import { addToCart } from "../../actions/cartActions";
 
-import Rating from "../UI/Rating";
-import Loader from "../UI/Loader";
-import AlertMessage from "../UI/AlertMessage";
+import Rating from "../Interface/Rating";
+import Loader from "../Interface/Loader";
+import AlertMessage from "../Interface/AlertMessage";
 
 import {
 	Grid,

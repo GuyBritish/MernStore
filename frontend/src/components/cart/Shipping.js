@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { saveShippingInfo } from "../../actions/cartActions";
 
-import FormContainer from "../UI/FormContainer";
+import FormContainer from "../Interface/FormContainer";
 
 import { FormGroup, InputLabel, FilledInput, Button } from "@mui/material";
 

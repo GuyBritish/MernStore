@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getUser, updateProfile } from "../../actions/userActions";
 
-import AlertMessage from "../UI/AlertMessage";
-import Loader from "../UI/Loader";
+import AlertMessage from "../Interface/AlertMessage";
+import Loader from "../Interface/Loader";
 import { Button, FormGroup, Grid, FilledInput, InputLabel } from "@mui/material";
 
 import { USER_UPDATE_RESET } from "../../constants/userConst";

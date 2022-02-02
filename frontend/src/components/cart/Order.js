@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { createOrder } from "../../actions/orderActions";
 
-import AlertMessage from "../UI/AlertMessage";
+import AlertMessage from "../Interface/AlertMessage";
 
 import { Grid, List, ListItem, Typography, Divider, Card, Button } from "@mui/material";
 

@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { register } from "../../actions/userActions";
 
-import FormContainer from "../UI/FormContainer";
-import AlertMessage from "../UI/AlertMessage";
-import Loader from "../UI/Loader";
+import FormContainer from "../Interface/FormContainer";
+import AlertMessage from "../Interface/AlertMessage";
+import Loader from "../Interface/Loader";
 import { Button, FormGroup, Grid, FilledInput, InputLabel } from "@mui/material";
 
 const RegisterForm = () => {

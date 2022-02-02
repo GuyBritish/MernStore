@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addToCart, removeFromCart } from "../../actions/cartActions";
 
-import AlertMessage from "../UI/AlertMessage";
+import AlertMessage from "../Interface/AlertMessage";
 
 import {
 	Grid,
