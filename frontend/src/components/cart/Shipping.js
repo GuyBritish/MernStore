@@ -49,7 +49,7 @@ const Shipping = () => {
 						hiddenLabel
 						disableUnderline
 						required
-						value={address}
+						value={address || ""}
 						placeholder="Enter shipping address"
 						onChange={(event) => {
 							setAddress(event.target.value);
@@ -68,7 +68,7 @@ const Shipping = () => {
 						hiddenLabel
 						disableUnderline
 						required
-						value={city}
+						value={city || ""}
 						placeholder="Enter city"
 						onChange={(event) => {
 							setCity(event.target.value);
@@ -87,7 +87,7 @@ const Shipping = () => {
 						hiddenLabel
 						disableUnderline
 						required
-						value={postalCode}
+						value={postalCode || ""}
 						placeholder="Enter postal code"
 						onChange={(event) => {
 							setPostalCode(event.target.value);
@@ -106,7 +106,7 @@ const Shipping = () => {
 						hiddenLabel
 						disableUnderline
 						required
-						value={country}
+						value={country || ""}
 						placeholder="Enter country"
 						onChange={(event) => {
 							setCountry(event.target.value);
