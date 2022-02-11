@@ -28,7 +28,7 @@ const OrderDetails = () => {
 		loading: loadingPay,
 		error: errorPay,
 	} = useSelector((state) => {
-		return state.orderDetails;
+		return state.orderPay;
 	});
 
 	useEffect(() => {
@@ -247,7 +247,7 @@ const OrderDetails = () => {
 											) : (
 												<PayPalButton
 													amount={order.totalPrice.toFixed(2)}
-													onSucess={paymentSuccesHandler}
+													onSuccess={paymentSuccesHandler}
 												/>
 											)}
 										</ListItem>
