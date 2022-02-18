@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { resolvePath, useNavigate } from "react-router-dom";
+import { Link, resolvePath, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getUser, updateProfile } from "../../actions/userActions";
+import { listMyOrders } from "../../actions/orderActions";
+import { USER_UPDATE_RESET } from "../../constants/userConst";
 
 import AlertMessage from "../Interface/AlertMessage";
 import Loader from "../Interface/Loader";
-import { Button, FormGroup, Grid, FilledInput, InputLabel } from "@mui/material";
-
-import { USER_UPDATE_RESET } from "../../constants/userConst";
+import CustomTableRow from "../Interface/CustomTableRow";
+import CustomTableCell from "../Interface/CustomTableCell";
+import {
+	Button,
+	FormGroup,
+	Grid,
+	FilledInput,
+	InputLabel,
+	TableContainer,
+	TableHead,
+	TableBody,
+	TableRow,
+	Table,
+	Paper,
+} from "@mui/material";
 
 const Profile = () => {
 	const navigate = useNavigate();
@@ -32,12 +46,21 @@ const Profile = () => {
 		return state.userUpdate;
 	});
 
+	const {
+		orderList,
+		loading: loadingOrders,
+		error: errorOrders,
+	} = useSelector((state) => {
+		return state.orderUserList;
+	});
+
 	useEffect(() => {
 		if (!userInfo) {
 			navigate(resolvePath("/login"), { replace: true });
 		} else {
 			if (!user.name) {
 				dispatch(getUser("profile"));
+				dispatch(listMyOrders());
 			} else {
 				dispatch({ type: USER_UPDATE_RESET });
 				setName(user.name);
@@ -63,7 +86,7 @@ const Profile = () => {
 	};
 
 	return (
-		<Grid container>
+		<Grid container sx={{ mt: 3 }}>
 			<Grid item md={3}>
 				<h2>User Profile</h2>
 				{message && <AlertMessage variant="error">{message}</AlertMessage>}
@@ -161,6 +184,84 @@ const Profile = () => {
 			</Grid>
 			<Grid item md={9} pl={4}>
 				<h2>My Orders</h2>
+				{loadingOrders ? (
+					<Loader />
+				) : errorOrders ? (
+					<AlertMessage variant="error">{errorOrders}</AlertMessage>
+				) : (
+					orderList && (
+						<TableContainer component={Paper} sx={{ mt: 3 }}>
+							<Table sx={{ minWidth: 700 }} aria-label="customized table">
+								<TableHead>
+									<TableRow>
+										<CustomTableCell align="center">ID</CustomTableCell>
+										<CustomTableCell align="center">DATE</CustomTableCell>
+										<CustomTableCell align="center">TOTAL</CustomTableCell>
+										<CustomTableCell align="center">PAID</CustomTableCell>
+										<CustomTableCell align="center">DELIVERED</CustomTableCell>
+										<CustomTableCell align="center"></CustomTableCell>
+									</TableRow>
+								</TableHead>
+								<TableBody>
+									{orderList.map((order) => (
+										<CustomTableRow key={order._id}>
+											<CustomTableCell component="th" scope="order">
+												{order._id}
+											</CustomTableCell>
+											<CustomTableCell align="center">
+												{order.createdAt.substring(0, 10)}
+											</CustomTableCell>
+											<CustomTableCell align="right">
+												{order.totalPrice.toFixed(2)}
+											</CustomTableCell>
+											<CustomTableCell align="center">
+												{order.isPaid ? (
+													order.paidAt.substring(0, 10)
+												) : (
+													<i
+														className="fas fa-times"
+														style={{ color: "red" }}
+													/>
+												)}
+											</CustomTableCell>
+											<CustomTableCell align="center">
+												{order.isDelivered ? (
+													order.deliveredAt.substring(0, 10)
+												) : (
+													<i
+														className="fas fa-times"
+														style={{ color: "red" }}
+													/>
+												)}
+											</CustomTableCell>
+											<CustomTableCell align="center">
+												<Grid container justifyContent="center">
+													<Button
+														sx={{
+															flexGrow: 1,
+															mx: 1,
+															display: "block",
+															color: "inherit",
+															backgroundColor: "inherit",
+															align: "center",
+														}}
+														className="darkButton"
+														variant="contained"
+														disableElevation
+														component={Link}
+														to={`/orders/${order._id}`}
+													>
+														Details
+													</Button>
+												</Grid>
+											</CustomTableCell>
+										</CustomTableRow>
+									))}
+								</TableBody>
+							</Table>
+						</TableContainer>
+					)
+				)}
 			</Grid>
 		</Grid>
 	);
