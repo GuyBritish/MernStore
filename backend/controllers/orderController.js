@@ -78,6 +78,12 @@ const setOderPaid = async (req, res) => {
 	}
 };
 
+const getUserOrders = async (req, res) => {
+	const orders = await Order.find({ user: req.user._id });
+
+	res.json(orders);
+};
+
 /* -------------------------------------------------------------------------- */
 
-module.exports = { addOrder, getOrder, getOrderById, setOderPaid };
+module.exports = { addOrder, getOrder, getOrderById, setOderPaid, getUserOrders };
