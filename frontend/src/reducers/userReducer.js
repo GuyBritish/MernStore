@@ -17,6 +17,7 @@ import {
 	USER_LIST_REQUEST,
 	USER_LIST_SUCCESS,
 	USER_LIST_FAIL,
+	USER_LIST_RESET,
 } from "../constants/userConst";
 
 export const userAuthReducer = (state = {}, action) => {
@@ -77,7 +78,7 @@ export const userUpdateReducer = (state = {}, action) => {
 	}
 };
 
-export const userListReducer = (state = { users: [] }, action) => {
+export const userListReducer = (state = { userList: [] }, action) => {
 	switch (action.type) {
 		case USER_LIST_REQUEST:
 			return { loading: true };
@@ -85,6 +86,8 @@ export const userListReducer = (state = { users: [] }, action) => {
 			return { loading: false, userList: action.payload };
 		case USER_LIST_FAIL:
 			return { loading: false, error: action.payload };
+		case USER_LIST_RESET:
+			return { userList: [] };
 		default:
 			return state;
 	}
