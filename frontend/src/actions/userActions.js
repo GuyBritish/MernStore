@@ -198,8 +198,7 @@ export const listUsers = () => {
 			} = getState();
 
 			const options = {
-				url: "/api/users/profile",
-				method: "PUT",
+				url: "/api/users",
 				headers: {
 					Authorization: `Bearer ${userInfo.token}`,
 				},
