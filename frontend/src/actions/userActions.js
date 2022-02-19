@@ -15,6 +15,9 @@ import {
 	USER_UPDATE_REQUEST,
 	USER_UPDATE_SUCCESS,
 	USER_UPDATE_FAIL,
+	USER_LIST_REQUEST,
+	USER_LIST_SUCCESS,
+	USER_LIST_FAIL,
 } from "../constants/userConst";
 
 import { ORDER_USER_LIST_RESET } from "../constants/orderConst";
@@ -176,6 +179,41 @@ export const updateProfile = (user) => {
 		} catch (err) {
 			dispatch({
 				type: USER_UPDATE_FAIL,
+				payload:
+					err.response && err.response.data.message
+						? err.response.data.message
+						: err.message,
+			});
+		}
+	};
+};
+
+export const listUsers = () => {
+	return async (dispatch, getState) => {
+		try {
+			dispatch({ type: USER_LIST_REQUEST });
+
+			const {
+				userAuth: { userInfo },
+			} = getState();
+
+			const options = {
+				url: "/api/users/profile",
+				method: "PUT",
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			const resp = await axios(options);
+
+			dispatch({
+				type: USER_LIST_SUCCESS,
+				payload: resp.data,
+			});
+		} catch (err) {
+			dispatch({
+				type: USER_LIST_FAIL,
 				payload:
 					err.response && err.response.data.message
 						? err.response.data.message
