@@ -27,6 +27,7 @@ const Header = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
+	const [anchorElAdmin, setAnchorElAdmin] = React.useState(null);
 
 	const { userInfo } = useSelector((state) => {
 		return state.userAuth;
@@ -39,6 +40,17 @@ const Header = () => {
 
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
+		setAnchorElAdmin(null);
+	};
+
+	const handleOpenAdminMenu = (event) => {
+		event.preventDefault();
+		setAnchorElAdmin(event.currentTarget);
+	};
+
+	const handleCloseAdminMenu = () => {
+		setAnchorElAdmin(null);
+		setAnchorElUser(null);
 	};
 
 	const handleProfileMenu = () => {
@@ -50,6 +62,21 @@ const Header = () => {
 		handleCloseUserMenu();
 		dispatch(logout());
 		navigate(resolvePath("/"), { replace: true });
+	};
+
+	const handleAdminUsersMenu = () => {
+		handleCloseUserMenu();
+		navigate(resolvePath("/admin/userlist"));
+	};
+
+	const handleAdminProductsMenu = () => {
+		handleCloseUserMenu();
+		navigate(resolvePath("/admin/productlist"));
+	};
+
+	const handleAdminOrdersMenu = () => {
+		handleCloseUserMenu();
+		navigate(resolvePath("/admin/orderlist"));
 	};
 
 	return (
@@ -152,6 +179,52 @@ const Header = () => {
 											<i className="fas fa-user" /> Sign In
 										</Button>
 									</NavLink>
+								)}
+								{userInfo && userInfo.isAdmin && (
+									<React.Fragment>
+										<NavLink
+											to="/admin"
+											className={(nav) =>
+												nav.isActive ? "navlink linkActive" : "navlink"
+											}
+										>
+											<Button
+												sx={{ my: 2, color: "inherit", display: "block" }}
+												onClick={handleOpenAdminMenu}
+											>
+												<i className="fas fa-shield" /> Admin
+											</Button>
+										</NavLink>
+										<Menu
+											sx={{ mt: "45px" }}
+											id="menu-appbar"
+											anchorEl={anchorElAdmin}
+											anchorOrigin={{
+												vertical: "top",
+												horizontal: "right",
+											}}
+											keepMounted
+											transformOrigin={{
+												vertical: "top",
+												horizontal: "right",
+											}}
+											open={Boolean(anchorElAdmin)}
+											onClose={handleCloseAdminMenu}
+										>
+											<MenuItem key="users" onClick={handleAdminUsersMenu}>
+												<Typography textAlign="center">Users</Typography>
+											</MenuItem>
+											<MenuItem
+												key="products"
+												onClick={handleAdminProductsMenu}
+											>
+												<Typography textAlign="center">Products</Typography>
+											</MenuItem>
+											<MenuItem key="orders" onClick={handleAdminOrdersMenu}>
+												<Typography textAlign="center">Orders</Typography>
+											</MenuItem>
+										</Menu>
+									</React.Fragment>
 								)}
 							</Box>
 						</Toolbar>
