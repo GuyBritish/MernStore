@@ -107,6 +107,19 @@ const getUsers = async (req, res) => {
 	res.json(users);
 };
 
+const deleteUser = async (req, res) => {
+	const params = req.params;
+	const user = await User.findById(params.id);
+
+	if (user) {
+		await user.remove();
+		res.json({ message: "User removed" });
+	} else {
+		res.status(404);
+		throw new Error("User not found");
+	}
+};
+
 /* -------------------------------------------------------------------------- */
 
-module.exports = { addUser, authUser, getProfile, updateProfile, getUsers };
+module.exports = { addUser, authUser, getProfile, updateProfile, getUsers, deleteUser };

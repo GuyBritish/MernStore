@@ -19,6 +19,8 @@ router.get("/profile", isAuth, catchAsync(control.getProfile));
 
 router.put("/profile", isAuth, catchAsync(control.updateProfile));
 
+router.delete("/:id", isAuth, isAdmin, catchAsync(control.deleteUser));
+
 /* -------------------------------------------------------------------------- */
 
 module.exports = router;
