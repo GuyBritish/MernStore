@@ -3,10 +3,13 @@ const router = express.Router({ mergeParams: true });
 
 const catchAsync = require("../utils/catchAsync");
 const isAuth = require("../middleware/authMiddleware");
+const isAdmin = require("../middleware/adminMiddleware");
 
 const control = require("../controllers/userController");
 
 /* -------------------------------------------------------------------------- */
+
+router.get("/", isAuth, isAdmin, catchAsync(control.getUsers));
 
 router.post("/", catchAsync(control.addUser));
 
