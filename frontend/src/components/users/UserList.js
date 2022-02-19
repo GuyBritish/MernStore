@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, resolvePath } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { listUsers } from "../../actions/userActions";
@@ -21,14 +21,23 @@ import {
 
 const UserList = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const { userList, loading, error } = useSelector((state) => {
 		return state.adminUserList;
 	});
 
+	const { userInfo } = useSelector((state) => {
+		return state.userAuth;
+	});
+
 	useEffect(() => {
-		dispatch(listUsers());
-	}, [dispatch]);
+		if (userInfo && userInfo.isAdmin) {
+			dispatch(listUsers());
+		} else {
+			navigate(resolvePath("/login"), { replace: true });
+		}
+	}, [dispatch, navigate, userInfo]);
 
 	const deleteUserHanler = () => {};
 
