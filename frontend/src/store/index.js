@@ -15,6 +15,7 @@ import {
 	userAuthReducer,
 	userDetailsReducer,
 	userUpdateReducer,
+	userListReducer,
 } from "../reducers/userReducer";
 
 /* -------------------------------------------------------------------------- */
@@ -50,6 +51,7 @@ const reducer = combineReducers({
 	orderDetails: orderDetailsReducer,
 	orderPay: orderPayReducer,
 	orderUserList: orderUserListReducer,
+	adminUserList: userListReducer,
 });
 
 const middleware = [thunk];
