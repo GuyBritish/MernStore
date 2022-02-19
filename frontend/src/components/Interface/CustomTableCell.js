@@ -12,7 +12,11 @@ const CustomTableCell = (props) => {
 			fontSize: 14,
 		},
 	}));
-	return <StyledTableCell align={props.align}>{props.children}</StyledTableCell>;
+	return (
+		<StyledTableCell align={props.align} sx={props.sx}>
+			{props.children}
+		</StyledTableCell>
+	);
 };
 
 export default CustomTableCell;
