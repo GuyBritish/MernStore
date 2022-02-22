@@ -8,8 +8,8 @@
 		"client": "npm start --prefix ./frontend",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"data:seed": "node ./backend/data/seeder.js",
-		"data:clear": "node ./backend/data/seeder.js -d"
+		"data:seed": "cd ./backend && node ./data/seeder.js  && cd ..",
+		"data:clear": "cd ./backend && node ./data/seeder.js -d  && cd .."
 	},
 	"repository": {
 		"type": "git",
