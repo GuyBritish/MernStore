@@ -18,6 +18,9 @@ import {
 	USER_LIST_SUCCESS,
 	USER_LIST_FAIL,
 	USER_LIST_RESET,
+	USER_REMOVE_REQUEST,
+	USER_REMOVE_SUCCESS,
+	USER_REMOVE_FAIL,
 } from "../constants/userConst";
 
 export const userAuthReducer = (state = {}, action) => {
@@ -88,6 +91,19 @@ export const userListReducer = (state = { userList: [] }, action) => {
 			return { loading: false, error: action.payload };
 		case USER_LIST_RESET:
 			return { userList: [] };
+		default:
+			return state;
+	}
+};
+
+export const userRemoveReducer = (state = {}, action) => {
+	switch (action.type) {
+		case USER_REMOVE_REQUEST:
+			return { loading: true };
+		case USER_REMOVE_SUCCESS:
+			return { loading: false, success: true };
+		case USER_REMOVE_FAIL:
+			return { loading: false, error: action.payload };
 		default:
 			return state;
 	}
