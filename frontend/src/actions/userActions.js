@@ -19,6 +19,9 @@ import {
 	USER_LIST_SUCCESS,
 	USER_LIST_FAIL,
 	USER_LIST_RESET,
+	USER_REMOVE_REQUEST,
+	USER_REMOVE_SUCCESS,
+	USER_REMOVE_FAIL,
 } from "../constants/userConst";
 
 import { ORDER_USER_LIST_RESET } from "../constants/orderConst";
@@ -215,6 +218,38 @@ export const listUsers = () => {
 		} catch (err) {
 			dispatch({
 				type: USER_LIST_FAIL,
+				payload:
+					err.response && err.response.data.message
+						? err.response.data.message
+						: err.message,
+			});
+		}
+	};
+};
+
+export const removeUser = (id) => {
+	return async (dispatch, getState) => {
+		try {
+			dispatch({ type: USER_REMOVE_REQUEST });
+
+			const {
+				userAuth: { userInfo },
+			} = getState();
+
+			const options = {
+				url: `/api/users/${id}`,
+				method: "DELETE",
+				headers: {
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+			};
+
+			await axios(options);
+
+			dispatch({ type: USER_REMOVE_SUCCESS });
+		} catch (err) {
+			dispatch({
+				type: USER_REMOVE_FAIL,
 				payload:
 					err.response && err.response.data.message
 						? err.response.data.message
