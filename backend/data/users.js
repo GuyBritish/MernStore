@@ -19,6 +19,12 @@ const users = [
 		password: bcrypt.hashSync("123456", 10),
 		isAdmin: true,
 	},
+	{
+		name: "Fogell McLovin",
+		email: "mclovin@badsuper.com",
+		password: bcrypt.hashSync("654321", 10),
+		isAdmin: false,
+	},
 ];
 
 /* -------------------------------------------------------------------------- */
