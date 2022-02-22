@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate, resolvePath } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { listUsers } from "../../actions/userActions";
+import { listUsers, removeUser } from "../../actions/userActions";
 
 import AlertMessage from "../Interface/AlertMessage";
 import Loader from "../Interface/Loader";
@@ -31,15 +31,23 @@ const UserList = () => {
 		return state.userAuth;
 	});
 
+	const { success: successRemove } = useSelector((state) => {
+		return state.adminUserRemove;
+	});
+
 	useEffect(() => {
 		if (userInfo && userInfo.isAdmin) {
 			dispatch(listUsers());
 		} else {
 			navigate(resolvePath("/login"), { replace: true });
 		}
-	}, [dispatch, navigate, userInfo]);
+	}, [dispatch, navigate, userInfo, successRemove]);
 
-	const deleteUserHanler = () => {};
+	const deleteUserHandler = (id) => {
+		if (window.confirm("Are you sure?")) {
+			dispatch(removeUser(id));
+		}
+	};
 
 	return (
 		<React.Fragment>
@@ -117,7 +125,9 @@ const UserList = () => {
 													disableElevation
 													component={Link}
 													to={``}
-													onClick={deleteUserHanler}
+													onClick={() => {
+														deleteUserHandler(user._id);
+													}}
 												>
 													<i className="fas fa-trash" />
 												</Button>
