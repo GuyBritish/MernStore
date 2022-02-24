@@ -19,6 +19,10 @@ router.get("/profile", isAuth, catchAsync(control.getProfile));
 
 router.put("/profile", isAuth, catchAsync(control.updateProfile));
 
+router.get("/:id", isAuth, isAdmin, catchAsync(control.getUserById));
+
+router.put("/:id", isAuth, isAdmin, catchAsync(control.updateUser));
+
 router.delete("/:id", isAuth, isAdmin, catchAsync(control.deleteUser));
 
 /* -------------------------------------------------------------------------- */
