@@ -107,6 +107,18 @@ const getUsers = async (req, res) => {
 	res.json(users);
 };
 
+const getUserById = async (req, res) => {
+	const params = req.params;
+	const user = await User.findById(params.id).select("-password");
+
+	if (user) {
+		res.json(user);
+	} else {
+		res.status(404);
+		throw new Error("User not found");
+	}
+};
+
 const deleteUser = async (req, res) => {
 	const params = req.params;
 	const user = await User.findById(params.id);
@@ -120,6 +132,46 @@ const deleteUser = async (req, res) => {
 	}
 };
 
+const updateUser = async (req, res) => {
+	const user = await User.findById(req.body._id);
+
+	if (req.body.email && req.body.email !== user.email) {
+		const emailUser = await User.findOne({ email: req.body.email });
+
+		if (emailUser) {
+			res.status(400);
+			throw new Error("User with this email address already exists");
+		}
+	}
+
+	if (user) {
+		user.name = req.body.name || user.name;
+		user.email = req.body.email || user.email;
+		user.isAdmin = req.body.isAdmin;
+
+		const updatedUser = await user.save();
+
+		res.json({
+			_id: updatedUser._id,
+			name: updatedUser.name,
+			email: updatedUser.email,
+			isAdmin: updatedUser.isAdmin,
+		});
+	} else {
+		res.status(404);
+		throw new Error("User not found");
+	}
+};
+
 /* -------------------------------------------------------------------------- */
 
-module.exports = { addUser, authUser, getProfile, updateProfile, getUsers, deleteUser };
+module.exports = {
+	addUser,
+	authUser,
+	getProfile,
+	updateProfile,
+	getUsers,
+	deleteUser,
+	getUserById,
+	updateUser,
+};
