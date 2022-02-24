@@ -133,7 +133,8 @@ const deleteUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-	const user = await User.findById(req.body._id);
+	const params = req.params;
+	const user = await User.findById(params.id);
 
 	if (req.body.email && req.body.email !== user.email) {
 		const emailUser = await User.findOne({ email: req.body.email });
