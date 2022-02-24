@@ -109,7 +109,7 @@ const UserList = () => {
 													variant="contained"
 													disableElevation
 													component={Link}
-													to={`/user/${user._id}/edit`}
+													to={`/admin/user/${user._id}/edit`}
 												>
 													<i className="fas fa-edit" />
 												</Button>
