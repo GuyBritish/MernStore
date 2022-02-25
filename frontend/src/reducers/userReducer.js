@@ -21,6 +21,10 @@ import {
 	USER_REMOVE_REQUEST,
 	USER_REMOVE_SUCCESS,
 	USER_REMOVE_FAIL,
+	USER_EDIT_REQUEST,
+	USER_EDIT_SUCCESS,
+	USER_EDIT_FAIL,
+	USER_EDIT_RESET,
 } from "../constants/userConst";
 
 export const userAuthReducer = (state = {}, action) => {
@@ -104,6 +108,21 @@ export const userRemoveReducer = (state = {}, action) => {
 			return { loading: false, success: true };
 		case USER_REMOVE_FAIL:
 			return { loading: false, error: action.payload };
+		default:
+			return state;
+	}
+};
+
+export const userEditReducer = (state = {}, action) => {
+	switch (action.type) {
+		case USER_EDIT_REQUEST:
+			return { loading: true };
+		case USER_EDIT_SUCCESS:
+			return { loading: false, success: true };
+		case USER_EDIT_FAIL:
+			return { loading: false, error: action.payload };
+		case USER_EDIT_RESET:
+			return {};
 		default:
 			return state;
 	}
