@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, resolvePath } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getUser } from "../../actions/userActions";
+import { getUser, editUser } from "../../actions/userActions";
+import { USER_EDIT_RESET } from "../../constants/userConst";
 
 import FormContainer from "../Interface/FormContainer";
 import AlertMessage from "../Interface/AlertMessage";
@@ -18,6 +19,7 @@ import {
 
 const AdminUserEdit = () => {
 	const params = useParams();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [name, setName] = useState("");
@@ -28,7 +30,19 @@ const AdminUserEdit = () => {
 		return state.userDetails;
 	});
 
+	const {
+		loading: loadingEdit,
+		error: errorEdit,
+		success: successEdit,
+	} = useSelector((state) => {
+		return state.adminUserEdit;
+	});
+
 	useEffect(() => {
+		if (successEdit) {
+			dispatch({ type: USER_EDIT_RESET });
+			navigate(resolvePath("/admin/userlist"), { replace: true });
+		}
 		if (!user || !user.name || user._id !== params.id) {
 			dispatch(getUser(params.id));
 		} else {
@@ -36,10 +50,11 @@ const AdminUserEdit = () => {
 			setEmail(user.email);
 			setIsAdmin(user.isAdmin);
 		}
-	}, [user, dispatch, params]);
+	}, [user, dispatch, params, successEdit, navigate]);
 
 	const editHandler = (event) => {
 		event.preventDefault();
+		dispatch(editUser({ _id: params.id, name, email, isAdmin }));
 	};
 
 	return (
@@ -49,6 +64,8 @@ const AdminUserEdit = () => {
 			</Link>
 			<FormContainer>
 				<h1>Edit User</h1>
+				{loadingEdit && <Loader />}
+				{errorEdit && <AlertMessage variant="error">{errorEdit}</AlertMessage>}
 				{loading ? (
 					<Loader />
 				) : error ? (
