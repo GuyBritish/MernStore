@@ -16,6 +16,7 @@ import Payment from "./components/cart/Payment";
 import Order from "./components/cart/Order";
 import OrderDetails from "./components/cart/OrderDetails";
 import UserList from "./components/users/UserList";
+import AdminUserEdit from "./components/users/AdminUserEdit";
 
 function App() {
 	return (
@@ -36,6 +37,7 @@ function App() {
 						<Route path="/order" element={<Order />} />
 						<Route path="/order/:id" element={<OrderDetails />} />
 						<Route path="/admin/userlist" element={<UserList />} />
+						<Route path="/admin/user/:id/edit" element={<AdminUserEdit />} />
 					</Routes>
 				</Container>
 			</main>
