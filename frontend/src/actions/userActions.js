@@ -22,6 +22,10 @@ import {
 	USER_REMOVE_REQUEST,
 	USER_REMOVE_SUCCESS,
 	USER_REMOVE_FAIL,
+	USER_EDIT_REQUEST,
+	USER_EDIT_SUCCESS,
+	USER_EDIT_FAIL,
+	USER_EDIT_RESET,
 } from "../constants/userConst";
 
 import { ORDER_USER_LIST_RESET } from "../constants/orderConst";
@@ -113,6 +117,7 @@ export const logout = () => {
 		dispatch({ type: USER_DETAILS_RESET });
 		dispatch({ type: ORDER_USER_LIST_RESET });
 		dispatch({ type: USER_LIST_RESET });
+		dispatch({ type: USER_EDIT_RESET });
 	};
 };
 
@@ -250,6 +255,46 @@ export const removeUser = (id) => {
 		} catch (err) {
 			dispatch({
 				type: USER_REMOVE_FAIL,
+				payload:
+					err.response && err.response.data.message
+						? err.response.data.message
+						: err.message,
+			});
+		}
+	};
+};
+
+export const editUser = (user) => {
+	return async (dispatch, getState) => {
+		try {
+			dispatch({ type: USER_EDIT_REQUEST });
+
+			const {
+				userAuth: { userInfo },
+			} = getState();
+
+			const options = {
+				url: `/api/users/${user._id}`,
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+				data: {
+					_id: user.id,
+					name: user.name,
+					email: user.email,
+					isAdmin: user.isAdmin,
+				},
+			};
+
+			const resp = await axios(options);
+
+			dispatch({ type: USER_EDIT_SUCCESS });
+			dispatch({ type: USER_DETAILS_SUCCESS, payload: resp.data });
+		} catch (err) {
+			dispatch({
+				type: USER_EDIT_FAIL,
 				payload:
 					err.response && err.response.data.message
 						? err.response.data.message
