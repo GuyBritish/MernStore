@@ -57,13 +57,19 @@ const UserList = () => {
 
 	return (
 		<React.Fragment>
-			<Grid container className="algin-items-center">
+			<Grid
+				container
+				className="algin-items-center"
+				justifyContent="space-between"
+				sx={{ mt: 2 }}
+			>
 				<Grid item>
-					<h1>Products</h1>
+					<h1 className="mt-2">Products</h1>
 				</Grid>
 				<Grid item className="text-right">
-					<Button className="my-3" onClick={createProductHandler}>
-						<i className="fas fa-plus" /> Create Product
+					<Button className="my-2" size="large" onClick={createProductHandler}>
+						<i className="fas fa-plus" />
+						&nbsp;Create Product
 					</Button>
 				</Grid>
 			</Grid>
