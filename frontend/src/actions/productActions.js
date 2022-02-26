@@ -75,6 +75,7 @@ export const deleteProduct = (id) => {
 					Authorization: `Bearer ${userInfo.token}`,
 				},
 			};
+
 			await axios(options);
 
 			dispatch({ type: PRODUCT_DELETE_SUCCESS });

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate, resolvePath } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { listProducts } from "../../actions/productActions";
+import { listProducts, deleteProduct } from "../../actions/productActions";
 
 import AlertMessage from "../Interface/AlertMessage";
 import Loader from "../Interface/Loader";
@@ -27,6 +27,14 @@ const UserList = () => {
 		return state.productList;
 	});
 
+	const {
+		success: successRemove,
+		loading: loadingRemove,
+		error: errorRemove,
+	} = useSelector((state) => {
+		return state.adminProductRemove;
+	});
+
 	const { userInfo } = useSelector((state) => {
 		return state.userAuth;
 	});
@@ -37,13 +45,13 @@ const UserList = () => {
 		} else {
 			navigate(resolvePath("/login"), { replace: true });
 		}
-	}, [dispatch, navigate, userInfo]);
+	}, [dispatch, navigate, userInfo, successRemove]);
 
 	const createProductHandler = () => {};
 
 	const deleteProductHandler = (id) => {
 		if (window.confirm("Are you sure?")) {
-			console.log("Delete product");
+			dispatch(deleteProduct(id));
 		}
 	};
 
@@ -59,6 +67,8 @@ const UserList = () => {
 					</Button>
 				</Grid>
 			</Grid>
+			{loadingRemove && <Loader />}
+			{errorRemove && <AlertMessage variant="error">{errorRemove}</AlertMessage>}
 			{loading ? (
 				<Loader />
 			) : error ? (
