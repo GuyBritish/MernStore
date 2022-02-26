@@ -19,7 +19,7 @@ import {
 	Paper,
 } from "@mui/material";
 
-const UserList = () => {
+const AdminUserList = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -144,4 +144,4 @@ const UserList = () => {
 	);
 };
 
-export default UserList;
+export default AdminUserList;
