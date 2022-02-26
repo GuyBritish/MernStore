@@ -17,6 +17,19 @@ const getOneProduct = async (req, res) => {
 	}
 };
 
+const deleteOneProduct = async (req, res) => {
+	const { id } = req.params;
+	const product = await Product.findById(id);
+
+	if (product) {
+		await product.remove();
+		res.json({ message: "Produce removed" });
+	} else {
+		res.status(404);
+		throw new Error("Product not found");
+	}
+};
+
 /* -------------------------------------------------------------------------- */
 
-module.exports = { getProducts, getOneProduct };
+module.exports = { getProducts, getOneProduct, deleteOneProduct };
