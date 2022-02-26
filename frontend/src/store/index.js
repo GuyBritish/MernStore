@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import {
+	productCreateReducer,
 	productDeleteReducer,
 	productDetailsReducer,
 	productListReducer,
@@ -61,6 +62,7 @@ const reducer = combineReducers({
 	adminUserRemove: userRemoveReducer,
 	adminUserEdit: userEditReducer,
 	adminProductRemove: productDeleteReducer,
+	adminProductCreate: productCreateReducer,
 });
 
 const middleware = [thunk];
