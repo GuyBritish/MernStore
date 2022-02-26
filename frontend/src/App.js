@@ -15,8 +15,8 @@ import Shipping from "./components/cart/Shipping";
 import Payment from "./components/cart/Payment";
 import Order from "./components/cart/Order";
 import OrderDetails from "./components/cart/OrderDetails";
-import UserList from "./components/users/UserList";
-import AdminUserEdit from "./components/users/AdminUserEdit";
+import AdminUserList from "./components/admin/AdminUserList";
+import AdminUserEdit from "./components/admin/AdminUserEdit";
 
 function App() {
 	return (
@@ -36,7 +36,7 @@ function App() {
 						<Route path="/payment" element={<Payment />} />
 						<Route path="/order" element={<Order />} />
 						<Route path="/order/:id" element={<OrderDetails />} />
-						<Route path="/admin/userlist" element={<UserList />} />
+						<Route path="/admin/userlist" element={<AdminUserList />} />
 						<Route path="/admin/user/:id/edit" element={<AdminUserEdit />} />
 					</Routes>
 				</Container>
