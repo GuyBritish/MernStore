@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { Link, useNavigate, resolvePath } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { listProducts, deleteProduct } from "../../actions/productActions";
+import { listProducts, deleteProduct, createProduct } from "../../actions/productActions";
+import { PRODUCT_CREATE_RESET } from "../../constants/productConst";
 
 import AlertMessage from "../Interface/AlertMessage";
 import Loader from "../Interface/Loader";
@@ -35,19 +36,38 @@ const UserList = () => {
 		return state.adminProductRemove;
 	});
 
+	const {
+		success: successCreate,
+		loading: loadingCreate,
+		error: errorCreate,
+		product: createdProduct,
+	} = useSelector((state) => {
+		return state.adminProductCreate;
+	});
+
 	const { userInfo } = useSelector((state) => {
 		return state.userAuth;
 	});
 
 	useEffect(() => {
+		dispatch({ type: PRODUCT_CREATE_RESET });
+
 		if (userInfo && userInfo.isAdmin) {
 			dispatch(listProducts());
 		} else {
 			navigate(resolvePath("/login"), { replace: true });
 		}
-	}, [dispatch, navigate, userInfo, successRemove]);
 
-	const createProductHandler = () => {};
+		if (successCreate) {
+			navigate(resolvePath(`/admin/product/${createdProduct._id}/edit`));
+		} else {
+			dispatch(listProducts());
+		}
+	}, [dispatch, navigate, userInfo, successRemove, successCreate, createdProduct]);
+
+	const createProductHandler = () => {
+		dispatch(createProduct());
+	};
 
 	const deleteProductHandler = (id) => {
 		if (window.confirm("Are you sure?")) {
@@ -73,6 +93,8 @@ const UserList = () => {
 					</Button>
 				</Grid>
 			</Grid>
+			{loadingCreate && <Loader />}
+			{errorCreate && <AlertMessage variant="error">{errorCreate}</AlertMessage>}
 			{loadingRemove && <Loader />}
 			{errorRemove && <AlertMessage variant="error">{errorRemove}</AlertMessage>}
 			{loading ? (
