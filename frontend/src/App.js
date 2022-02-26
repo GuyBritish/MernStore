@@ -15,8 +15,10 @@ import Shipping from "./components/cart/Shipping";
 import Payment from "./components/cart/Payment";
 import Order from "./components/cart/Order";
 import OrderDetails from "./components/cart/OrderDetails";
+
 import AdminUserList from "./components/admin/AdminUserList";
 import AdminUserEdit from "./components/admin/AdminUserEdit";
+import AdminProductList from "./components/admin/AdminProductList";
 
 function App() {
 	return (
@@ -29,15 +31,19 @@ function App() {
 						<Route path="/products/:id" element={<ProductDetails />} />
 						<Route path="/cart" element={<Cart />} />
 						<Route path="/cart/:id" element={<Cart />} />
+
 						<Route path="/login" element={<LoginForm />} />
 						<Route path="/register" element={<RegisterForm />} />
 						<Route path="/profile" element={<Profile />} />
+
 						<Route path="/shipping" element={<Shipping />} />
 						<Route path="/payment" element={<Payment />} />
 						<Route path="/order" element={<Order />} />
 						<Route path="/order/:id" element={<OrderDetails />} />
+
 						<Route path="/admin/userlist" element={<AdminUserList />} />
 						<Route path="/admin/user/:id/edit" element={<AdminUserEdit />} />
+						<Route path="/admin/productlist" element={<AdminProductList />} />
 					</Routes>
 				</Container>
 			</main>
