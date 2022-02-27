@@ -40,6 +40,7 @@ const createProduct = async (req, res) => {
 		category: "Sample category",
 		countInStock: 0,
 		numReviews: 0,
+		rating: 0,
 		description: "Sample description",
 	});
 
@@ -50,7 +51,7 @@ const createProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
 	const params = req.params;
-	const { name, price, image, brand, category, countInStock, numReviews, description } = req.body;
+	const { name, price, image, brand, category, countInStock, description } = req.body;
 
 	const product = await Product.findById(params.id);
 
@@ -61,7 +62,6 @@ const updateProduct = async (req, res) => {
 		product.brand = brand;
 		product.category = category;
 		product.countInStock = countInStock;
-		product.numReviews = numReviews;
 		product.description = description;
 
 		const updatedProduct = await product.save();
