@@ -42,13 +42,14 @@ const AdminUserEdit = () => {
 		if (successEdit) {
 			dispatch({ type: USER_EDIT_RESET });
 			navigate(resolvePath("/admin/userlist"), { replace: true });
-		}
-		if (!user || !user.name || user._id !== params.id) {
-			dispatch(getUser(params.id));
 		} else {
-			setName(user.name);
-			setEmail(user.email);
-			setIsAdmin(user.isAdmin);
+			if (!user || !user.name || user._id !== params.id) {
+				dispatch(getUser(params.id));
+			} else {
+				setName(user.name);
+				setEmail(user.email);
+				setIsAdmin(user.isAdmin);
+			}
 		}
 	}, [user, dispatch, params, successEdit, navigate]);
 
