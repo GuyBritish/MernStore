@@ -19,6 +19,7 @@ import OrderDetails from "./components/cart/OrderDetails";
 import AdminUserList from "./components/admin/AdminUserList";
 import AdminUserEdit from "./components/admin/AdminUserEdit";
 import AdminProductList from "./components/admin/AdminProductList";
+import AdminProductEdit from "./components/admin/AdminProductEdit";
 
 function App() {
 	return (
@@ -44,6 +45,7 @@ function App() {
 						<Route path="/admin/userlist" element={<AdminUserList />} />
 						<Route path="/admin/user/:id/edit" element={<AdminUserEdit />} />
 						<Route path="/admin/productlist" element={<AdminProductList />} />
+						<Route path="/admin/product/:id/edit" element={<AdminProductEdit />} />
 					</Routes>
 				</Container>
 			</main>
