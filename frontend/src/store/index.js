@@ -6,6 +6,7 @@ import {
 	productCreateReducer,
 	productDeleteReducer,
 	productDetailsReducer,
+	productEditReducer,
 	productListReducer,
 } from "../reducers/productReducer";
 import { cartReducer } from "../reducers/cartReducer";
@@ -63,6 +64,7 @@ const reducer = combineReducers({
 	adminUserEdit: userEditReducer,
 	adminProductRemove: productDeleteReducer,
 	adminProductCreate: productCreateReducer,
+	adminProductEdit: productEditReducer,
 });
 
 const middleware = [thunk];
