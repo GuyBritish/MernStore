@@ -139,7 +139,7 @@ export const editProduct = (product) => {
 			} = getState();
 
 			const options = {
-				url: `/api/products/${product._id}/edit`,
+				url: `/api/products/${product._id}`,
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
