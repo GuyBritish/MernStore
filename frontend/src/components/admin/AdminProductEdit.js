@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, resolvePath, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { listProductDetails } from "../../actions/productActions";
+import { listProductDetails, editProduct } from "../../actions/productActions";
+import { PRODUCT_EDIT_RESET } from "../../constants/productConst";
 
 import FormContainer from "../Interface/FormContainer";
 import AlertMessage from "../Interface/AlertMessage";
@@ -26,22 +27,47 @@ const AdminProductEdit = () => {
 		return state.productDetails;
 	});
 
+	const {
+		loading: loadingEdit,
+		error: errorEdit,
+		success: successEdit,
+	} = useSelector((state) => {
+		return state.adminProductEdit;
+	});
+
 	useEffect(() => {
-		if (!product || !product.name || product._id !== params.id) {
-			dispatch(listProductDetails(params.id));
+		if (successEdit) {
+			dispatch({ type: PRODUCT_EDIT_RESET });
+			navigate(resolvePath("/admin/productlist"), { replace: true });
 		} else {
-			setName(product.name);
-			setPrice(product.price);
-			setImage(product.image);
-			setBrand(product.brand);
-			setCategory(product.category);
-			setCountInStock(product.countInStock);
-			setDescription(product.description);
+			if (!product || !product.name || product._id !== params.id) {
+				dispatch(listProductDetails(params.id));
+			} else {
+				setName(product.name);
+				setPrice(product.price);
+				setImage(product.image);
+				setBrand(product.brand);
+				setCategory(product.category);
+				setCountInStock(product.countInStock);
+				setDescription(product.description);
+			}
 		}
-	}, [product, dispatch, params, navigate]);
+	}, [product, dispatch, params, navigate, successEdit]);
 
 	const editHandler = (event) => {
 		event.preventDefault();
+		dispatch(
+			editProduct({
+				_id: params.id,
+				name,
+				price,
+				image,
+				brand,
+				category,
+				countInStock,
+				description,
+			})
+		);
 	};
 
 	return (
@@ -51,6 +77,8 @@ const AdminProductEdit = () => {
 			</Link>
 			<FormContainer>
 				<h1>Edit Product</h1>
+				{loadingEdit && <Loader />}
+				{errorEdit && <AlertMessage variant="error">{errorEdit}</AlertMessage>}
 				{loading ? (
 					<Loader />
 				) : error ? (
