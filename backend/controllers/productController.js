@@ -58,7 +58,7 @@ const updateProduct = async (req, res) => {
 	if (product) {
 		product.name = name;
 		product.price = price;
-		product.image = image;
+		product.image = req.file.path;
 		product.brand = brand;
 		product.category = category;
 		product.countInStock = countInStock;
