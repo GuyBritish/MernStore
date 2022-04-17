@@ -35,7 +35,7 @@ const createProduct = async (req, res) => {
 		name: "Sample name",
 		price: 0,
 		user: req.user._id,
-		image: "/images/sample.jpg",
+		image: "https://res.cloudinary.com/dqttprqho/image/upload/v1650177555/MernStore/sample_mtr5p0.jpg",
 		brand: "Sample brand",
 		category: "Sample category",
 		countInStock: 0,
