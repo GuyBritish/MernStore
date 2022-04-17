@@ -84,6 +84,12 @@ const getUserOrders = async (req, res) => {
 	res.json(orders);
 };
 
+const getOrders = async (req, res) => {
+	const orders = await Order.find({}).populate("user", "id name");
+
+	res.json(orders);
+};
+
 /* -------------------------------------------------------------------------- */
 
-module.exports = { addOrder, getOrder, getOrderById, setOderPaid, getUserOrders };
+module.exports = { addOrder, getOrder, getOrderById, setOderPaid, getUserOrders, getOrders };
