@@ -22,6 +22,7 @@ const AdminProductEdit = () => {
 	const [category, setCategory] = useState("");
 	const [countInStock, setCountInStock] = useState(0);
 	const [description, setDescription] = useState("");
+	const [imgName, setImgName] = useState("");
 
 	const { loading, error, product } = useSelector((state) => {
 		return state.productDetails;
@@ -45,7 +46,7 @@ const AdminProductEdit = () => {
 			} else {
 				setName(product.name);
 				setPrice(product.price);
-				setImage(product.image);
+				setImgName(product.image);
 				setBrand(product.brand);
 				setCategory(product.category);
 				setCountInStock(product.countInStock);
@@ -130,12 +131,23 @@ const AdminProductEdit = () => {
 									size="small"
 									hiddenLabel
 									disableUnderline
-									value={image}
+									value={imgName}
 									placeholder="Enter image url"
 									onChange={(event) => {
-										setImage(event.target.value);
+										setImgName(event.target.value);
 									}}
 								/>
+								<Button variant="contained" component="label">
+									Upload File
+									<input
+										type="file"
+										hidden
+										onChange={(event) => {
+											setImgName(event.target.files[0].name);
+											setImage(event.target.files[0]);
+										}}
+									/>
+								</Button>
 							</FormGroup>
 							<FormGroup className="my-3">
 								<InputLabel className="mb-2">

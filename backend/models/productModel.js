@@ -54,6 +54,10 @@ const ProductSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
+ProductSchema.virtual("thumbnail").get(function () {
+	return this.image.replace("/upload", "/upload/w_640,h_510,c_scale");
+});
+
 const Product = mongoose.model("Product", ProductSchema);
 
 /* -------------------------------------------------------------------------- */
