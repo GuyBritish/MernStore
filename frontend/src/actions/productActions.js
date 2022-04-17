@@ -138,14 +138,23 @@ export const editProduct = (product) => {
 				userAuth: { userInfo },
 			} = getState();
 
+			const dataUpload = new FormData();
+			dataUpload.append("name", product.name);
+			dataUpload.append("price", product.price);
+			dataUpload.append("brand", product.brand);
+			dataUpload.append("category", product.category);
+			dataUpload.append("countInStock", product.countInStock);
+			dataUpload.append("description", product.description);
+			dataUpload.append("image", product.image);
+
 			const options = {
 				url: `/api/products/${product._id}`,
 				method: "PUT",
 				headers: {
-					"Content-Type": "application/json",
+					"Content-Type": "multipart/form-data",
 					Authorization: `Bearer ${userInfo.token}`,
 				},
-				data: product,
+				data: dataUpload,
 			};
 
 			const resp = await axios(options);
