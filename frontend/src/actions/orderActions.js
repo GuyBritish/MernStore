@@ -133,7 +133,7 @@ export const payOrder = (id, paymentResult) => {
 	};
 };
 
-export const listMyOrders = () => {
+export const listOrders = () => {
 	return async (dispatch, getState) => {
 		try {
 			dispatch({
@@ -169,7 +169,7 @@ export const listMyOrders = () => {
 	};
 };
 
-export const listOrders = () => {
+export const listMyOrders = () => {
 	return async (dispatch, getState) => {
 		try {
 			dispatch({
