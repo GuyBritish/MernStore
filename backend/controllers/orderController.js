@@ -56,7 +56,7 @@ const getOrderById = async (req, res) => {
 	}
 };
 
-const setOderPaid = async (req, res) => {
+const setOrderPaid = async (req, res) => {
 	const { id } = req.params;
 	const order = await Order.findById(id);
 
@@ -70,8 +70,24 @@ const setOderPaid = async (req, res) => {
 			email_address: req.body.payer.email_address,
 		};
 
-		const updatedOder = await order.save();
-		res.json(updatedOder);
+		const updatedOrder = await order.save();
+		res.json(updatedOrder);
+	} else {
+		res.status(404);
+		throw new Error("Order not found");
+	}
+};
+
+const setOrderDelivered = async (req, res) => {
+	const { id } = req.params;
+	const order = await Order.findById(id);
+
+	if (order) {
+		order.isDelivered = true;
+		order.deliveredAt = Date.now();
+
+		const updatedOrder = await order.save();
+		res.json(updatedOrder);
 	} else {
 		res.status(404);
 		throw new Error("Order not found");
@@ -92,4 +108,12 @@ const getOrders = async (req, res) => {
 
 /* -------------------------------------------------------------------------- */
 
-module.exports = { addOrder, getOrder, getOrderById, setOderPaid, getUserOrders, getOrders };
+module.exports = {
+	addOrder,
+	getOrder,
+	getOrderById,
+	setOrderPaid,
+	setOrderDelivered,
+	getUserOrders,
+	getOrders,
+};

@@ -17,7 +17,9 @@ router.get("/myorders", isAuth, catchAsync(control.getUserOrders));
 
 router.get("/:id", isAuth, catchAsync(control.getOrderById));
 
-router.put("/:id/pay", isAuth, catchAsync(control.setOderPaid));
+router.put("/:id/pay", isAuth, catchAsync(control.setOrderPaid));
+
+router.put("/:id/deliver", isAuth, isAdmin, catchAsync(control.setOrderDelivered));
 
 /* -------------------------------------------------------------------------- */
 
