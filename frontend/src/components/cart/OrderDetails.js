@@ -267,28 +267,34 @@ const OrderDetails = () => {
 									)}
 
 									{loadingDeliver && <Loader />}
-									{userInfo.isAdmin && order.isPaid && !order.isDelivered && (
-										<ListItem
-											sx={{ borderBottomWidth: 2, pt: 2, px: 0 }}
-											style={{ display: "flex", justifyContent: "center" }}
-										>
-											<Button
-												sx={{
-													flexGrow: 1,
-													mx: 1,
-													display: "block",
-													color: "inherit",
-													backgroundColor: "inherit",
+									{userInfo &&
+										userInfo.isAdmin &&
+										order.isPaid &&
+										!order.isDelivered && (
+											<ListItem
+												sx={{ borderBottomWidth: 2, pt: 2, px: 0 }}
+												style={{
+													display: "flex",
+													justifyContent: "center",
 												}}
-												className="darkButton"
-												variant="contained"
-												disableElevation
-												onClick={deliverHandler}
 											>
-												Mark as delivered
-											</Button>
-										</ListItem>
-									)}
+												<Button
+													sx={{
+														flexGrow: 1,
+														mx: 1,
+														display: "block",
+														color: "inherit",
+														backgroundColor: "inherit",
+													}}
+													className="darkButton"
+													variant="contained"
+													disableElevation
+													onClick={deliverHandler}
+												>
+													Mark as delivered
+												</Button>
+											</ListItem>
+										)}
 								</List>
 							</Card>
 						</Grid>
