@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getOrderDetails, payOrder } from "../../actions/orderActions";
-import { ORDER_PAY_RESET } from "../../constants/orderConst";
+import { getOrderDetails, payOrder, deliverOrder } from "../../actions/orderActions";
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from "../../constants/orderConst";
 
 import Loader from "../Interface/Loader";
 import AlertMessage from "../Interface/AlertMessage";
 
-import { Grid, List, ListItem, Typography, Divider, Card } from "@mui/material";
+import { Grid, List, ListItem, Typography, Divider, Card, Button } from "@mui/material";
 import { PayPalButton } from "react-paypal-button-v2";
 
 import axios from "axios";
@@ -23,12 +23,16 @@ const OrderDetails = () => {
 		return state.orderDetails;
 	});
 
-	const {
-		success: successPay,
-		loading: loadingPay,
-		error: errorPay,
-	} = useSelector((state) => {
+	const { success: successPay, loading: loadingPay } = useSelector((state) => {
 		return state.orderPay;
+	});
+
+	const { success: successDeliver, loading: loadingDeliver } = useSelector((state) => {
+		return state.orderDeliver;
+	});
+
+	const { userInfo } = useSelector((state) => {
+		return state.userAuth;
 	});
 
 	useEffect(() => {
@@ -47,8 +51,9 @@ const OrderDetails = () => {
 			document.body.appendChild(PayPalScript);
 		};
 
-		if (!order || order._id !== params.id || successPay) {
+		if (!order || order._id !== params.id || successPay || successDeliver) {
 			dispatch({ type: ORDER_PAY_RESET });
+			dispatch({ type: ORDER_DELIVER_RESET });
 			dispatch(getOrderDetails(params.id));
 		} else {
 			if (!order.isPaid) {
@@ -59,10 +64,14 @@ const OrderDetails = () => {
 				}
 			}
 		}
-	}, [dispatch, params, order, successPay]);
+	}, [dispatch, params, order, successPay, successDeliver]);
 
 	const paymentSuccesHandler = (paymentResult) => {
 		dispatch(payOrder(params.id, paymentResult));
+	};
+
+	const deliverHandler = () => {
+		dispatch(deliverOrder(order));
 	};
 
 	return (
@@ -250,6 +259,30 @@ const OrderDetails = () => {
 													onSuccess={paymentSuccesHandler}
 												/>
 											)}
+										</ListItem>
+									)}
+
+									{loadingDeliver && <Loader />}
+									{userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+										<ListItem
+											sx={{ borderBottomWidth: 2, pt: 2, px: 0 }}
+											style={{ display: "flex", justifyContent: "center" }}
+										>
+											<Button
+												sx={{
+													flexGrow: 1,
+													mx: 1,
+													display: "block",
+													color: "inherit",
+													backgroundColor: "inherit",
+												}}
+												className="darkButton"
+												variant="contained"
+												disableElevation
+												onClick={deliverHandler}
+											>
+												Mark as delivered
+											</Button>
 										</ListItem>
 									)}
 								</List>
