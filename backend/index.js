@@ -19,12 +19,18 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
+if (process.env.NODE_ENV === "development") {
+	const morgan = require("morgan");
+	app.use(morgan("dev"));
+}
+
 /* -------------------------------------------------------------------------- */
 
 const productRoutes = require("./routes/product");
 const userRoutes = require("./routes/user");
 const orderRoutes = require("./routes/order");
 const paymentRoutes = require("./routes/payment");
+const morgan = require("morgan");
 
 app.get("/", (req, res) => {
 	res.send("API is running...");
