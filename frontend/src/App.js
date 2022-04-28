@@ -20,6 +20,7 @@ import AdminUserList from "./components/admin/AdminUserList";
 import AdminUserEdit from "./components/admin/AdminUserEdit";
 import AdminProductList from "./components/admin/AdminProductList";
 import AdminProductEdit from "./components/admin/AdminProductEdit";
+import AdminOrderList from "./components/admin/AdminOrderList";
 
 function App() {
 	return (
@@ -46,6 +47,7 @@ function App() {
 						<Route path="/admin/user/:id/edit" element={<AdminUserEdit />} />
 						<Route path="/admin/productlist" element={<AdminProductList />} />
 						<Route path="/admin/product/:id/edit" element={<AdminProductEdit />} />
+						<Route path="/admin/orderlist" element={<AdminOrderList />} />
 					</Routes>
 				</Container>
 			</main>
