@@ -58,9 +58,6 @@ const AdminOrderList = () => {
 									<CustomTableCell align="left">TOTAL</CustomTableCell>
 									<CustomTableCell align="left">PAID</CustomTableCell>
 									<CustomTableCell align="left">DELIVERED</CustomTableCell>
-									<CustomTableCell align="left" sx={{ pl: 0 }}>
-										ADMIN
-									</CustomTableCell>
 									<CustomTableCell align="center"></CustomTableCell>
 								</TableRow>
 							</TableHead>
@@ -114,7 +111,7 @@ const AdminOrderList = () => {
 													variant="contained"
 													disableElevation
 													component={Link}
-													to={`/admin/order/${order._id}/edit`}
+													to={`/order/${order._id}`}
 												>
 													Details
 												</Button>
