@@ -249,7 +249,7 @@ const Profile = () => {
 														variant="contained"
 														disableElevation
 														component={Link}
-														to={`/orders/${order._id}`}
+														to={`/order/${order._id}`}
 													>
 														Details
 													</Button>
