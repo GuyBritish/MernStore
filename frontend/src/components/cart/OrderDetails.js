@@ -68,7 +68,7 @@ const OrderDetails = () => {
 				}
 			}
 		}
-	}, [dispatch, params, order, successPay, successDeliver]);
+	}, [dispatch, params, order, successPay, successDeliver, userInfo, navigate]);
 
 	const paymentSuccesHandler = (paymentResult) => {
 		dispatch(payOrder(params.id, paymentResult));
