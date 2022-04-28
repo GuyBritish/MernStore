@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate, resolvePath } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getOrderDetails, payOrder, deliverOrder } from "../../actions/orderActions";
@@ -16,6 +16,7 @@ import axios from "axios";
 const OrderDetails = () => {
 	const params = useParams();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const [SDKReady, setSDKReady] = useState(false);
 
@@ -36,6 +37,9 @@ const OrderDetails = () => {
 	});
 
 	useEffect(() => {
+		if (!userInfo) {
+			navigate(resolvePath("/login"), { replace: true });
+		}
 		const addPayPalScript = async () => {
 			const options = {
 				url: "/api/payment/config/paypal",
