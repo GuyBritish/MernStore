@@ -16,6 +16,9 @@ import {
 	PRODUCT_EDIT_REQUEST,
 	PRODUCT_EDIT_SUCCESS,
 	PRODUCT_EDIT_FAIL,
+	PRODUCT_REVIEW_REQUEST,
+	PRODUCT_REVIEW_SUCCESS,
+	PRODUCT_REVIEW_FAIL,
 } from "../constants/productConst";
 
 export const listProducts = () => {
@@ -163,6 +166,40 @@ export const editProduct = (product) => {
 		} catch (err) {
 			dispatch({
 				type: PRODUCT_EDIT_FAIL,
+				payload:
+					err.response && err.response.data.message
+						? err.response.data.message
+						: err.message,
+			});
+		}
+	};
+};
+
+export const reviewProduct = (productId, review) => {
+	return async (dispatch, getState) => {
+		try {
+			dispatch({ type: PRODUCT_REVIEW_REQUEST });
+
+			const {
+				userAuth: { userInfo },
+			} = getState();
+
+			const options = {
+				url: `/api/products/${productId}/reviews`,
+				method: "POST",
+				headers: {
+					"Content-Type": "multipart/form-data",
+					Authorization: `Bearer ${userInfo.token}`,
+				},
+				data: review,
+			};
+
+			await axios(options);
+
+			dispatch({ type: PRODUCT_REVIEW_SUCCESS });
+		} catch (err) {
+			dispatch({
+				type: PRODUCT_REVIEW_FAIL,
 				payload:
 					err.response && err.response.data.message
 						? err.response.data.message
