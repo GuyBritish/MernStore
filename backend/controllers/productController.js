@@ -112,4 +112,11 @@ const createProductReview = async (req, res) => {
 
 /* -------------------------------------------------------------------------- */
 
-module.exports = { getProducts, getOneProduct, deleteOneProduct, createProduct, updateProduct };
+module.exports = {
+	getProducts,
+	getOneProduct,
+	deleteOneProduct,
+	createProduct,
+	updateProduct,
+	createProductReview,
+};
