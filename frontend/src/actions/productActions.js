@@ -179,7 +179,6 @@ export const reviewProduct = (productId, review) => {
 	return async (dispatch, getState) => {
 		try {
 			dispatch({ type: PRODUCT_REVIEW_REQUEST });
-
 			const {
 				userAuth: { userInfo },
 			} = getState();
@@ -188,7 +187,7 @@ export const reviewProduct = (productId, review) => {
 				url: `/api/products/${productId}/reviews`,
 				method: "POST",
 				headers: {
-					"Content-Type": "multipart/form-data",
+					"Content-Type": "application/json",
 					Authorization: `Bearer ${userInfo.token}`,
 				},
 				data: review,
