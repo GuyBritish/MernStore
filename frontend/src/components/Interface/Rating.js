@@ -66,7 +66,10 @@ const Rating = (props) => {
 					}
 				/>
 			</span>
-			<span>{props?.text && props.text}</span>
+			<span>
+				{"  "}
+				{props?.text && props.text}
+			</span>
 		</div>
 	);
 };
