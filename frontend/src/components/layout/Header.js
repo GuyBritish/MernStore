@@ -17,6 +17,8 @@ import {
 } from "@mui/material";
 import { Link, NavLink, resolvePath, useNavigate } from "react-router-dom";
 
+import SearchBox from "../Interface/SearchBox";
+
 const darkTheme = createTheme({
 	palette: {
 		mode: "dark",
@@ -112,6 +114,7 @@ const Header = () => {
 									MERN STORE
 								</Link>
 							</Typography>
+							<SearchBox />
 							<Box
 								sx={{
 									flexGrow: 0,

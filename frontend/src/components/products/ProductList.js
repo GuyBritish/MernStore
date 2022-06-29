@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import { listProducts } from "../../actions/productActions";
 
@@ -10,14 +11,15 @@ import AlertMessage from "../Interface/AlertMessage";
 import { Grid } from "@mui/material";
 
 const ProductList = () => {
+	const params = useParams();
 	const dispatch = useDispatch();
 	const { loading, error, products } = useSelector((state) => {
 		return state.productList;
 	});
 
 	useEffect(() => {
-		dispatch(listProducts());
-	}, [dispatch]);
+		dispatch(listProducts(params.keyword));
+	}, [dispatch, params]);
 
 	return (
 		<React.Fragment>
