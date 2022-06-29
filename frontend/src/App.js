@@ -48,6 +48,8 @@ function App() {
 						<Route path="/admin/productlist" element={<AdminProductList />} />
 						<Route path="/admin/product/:id/edit" element={<AdminProductEdit />} />
 						<Route path="/admin/orderlist" element={<AdminOrderList />} />
+
+						<Route path="/search/:keyword" element={<ProductList />} />
 					</Routes>
 				</Container>
 			</main>
