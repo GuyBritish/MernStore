@@ -3,7 +3,7 @@ import { Link, resolvePath, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { listProductDetails, editProduct } from "../../actions/productActions";
-import { PRODUCT_EDIT_RESET } from "../../constants/productConst";
+import { PRODUCT_DETAILS_RESET, PRODUCT_EDIT_RESET } from "../../constants/productConst";
 
 import FormContainer from "../Interface/FormContainer";
 import AlertMessage from "../Interface/AlertMessage";
@@ -38,6 +38,7 @@ const AdminProductEdit = () => {
 	useEffect(() => {
 		if (successEdit) {
 			dispatch({ type: PRODUCT_EDIT_RESET });
+			dispatch({ type: PRODUCT_DETAILS_RESET });
 			navigate(resolvePath("/admin/productlist"), { replace: true });
 		} else {
 			if (!product || !product.name || product._id !== params.id) {

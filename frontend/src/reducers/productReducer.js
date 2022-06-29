@@ -20,6 +20,7 @@ import {
 	PRODUCT_REVIEW_SUCCESS,
 	PRODUCT_REVIEW_FAIL,
 	PRODUCT_REVIEW_RESET,
+	PRODUCT_DETAILS_RESET,
 } from "../constants/productConst";
 
 export const productListReducer = (state = { products: [], loading: false }, action) => {
@@ -46,6 +47,8 @@ export const productDetailsReducer = (
 			return { product: action.payload, loading: false };
 		case PRODUCT_DETAILS_FAIL:
 			return { loading: false, error: action.payload };
+		case PRODUCT_DETAILS_RESET:
+			return {};
 		default:
 			return state;
 	}
