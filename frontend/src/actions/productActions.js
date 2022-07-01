@@ -21,13 +21,13 @@ import {
 	PRODUCT_REVIEW_FAIL,
 } from "../constants/productConst";
 
-export const listProducts = (keyword = "") => {
+export const listProducts = (keyword = "", pageNumber = "") => {
 	return async (dispatch) => {
 		try {
 			dispatch({ type: PRODUCT_LIST_REQUEST });
 
 			const options = {
-				url: `/api/products?keyword=${keyword}`,
+				url: `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`,
 			};
 			const resp = await axios(options);
 

@@ -18,7 +18,7 @@ const ProductList = () => {
 	});
 
 	useEffect(() => {
-		dispatch(listProducts(params.keyword));
+		dispatch(listProducts(params.keyword, params.pageNumber));
 	}, [dispatch, params]);
 
 	return (

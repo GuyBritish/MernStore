@@ -50,6 +50,8 @@ function App() {
 						<Route path="/admin/orderlist" element={<AdminOrderList />} />
 
 						<Route path="/search/:keyword" element={<ProductList />} />
+						<Route path="/search/:pageNumber" element={<ProductList />} />
+						<Route path="/search/:keyword/page/:pageNumber" element={<ProductList />} />
 					</Routes>
 				</Container>
 			</main>
