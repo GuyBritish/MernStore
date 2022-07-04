@@ -9,11 +9,12 @@ import Loader from "../Interface/Loader";
 import AlertMessage from "../Interface/AlertMessage";
 
 import { Grid } from "@mui/material";
+import Paginate from "../Interface/Paginate";
 
 const ProductList = () => {
 	const params = useParams();
 	const dispatch = useDispatch();
-	const { loading, error, products } = useSelector((state) => {
+	const { loading, error, products, page, pages } = useSelector((state) => {
 		return state.productList;
 	});
 
@@ -29,15 +30,18 @@ const ProductList = () => {
 			) : error ? (
 				<AlertMessage variant="error">{error}</AlertMessage>
 			) : (
-				<Grid container className="my-3" spacing={3}>
-					{products.map((prod) => {
-						return (
-							<Grid item key={prod._id} sm={12} md={6} lg={4} xl={3}>
-								<Product product={prod} />
-							</Grid>
-						);
-					})}
-				</Grid>
+				<React.Fragment>
+					<Grid container className="my-3" spacing={3}>
+						{products.map((prod) => {
+							return (
+								<Grid item key={prod._id} sm={12} md={6} lg={4} xl={3}>
+									<Product product={prod} />
+								</Grid>
+							);
+						})}
+					</Grid>
+					<Paginate page={page} pages={pages} keyword={params.keyword ?? ""} />
+				</React.Fragment>
 			)}
 		</React.Fragment>
 	);

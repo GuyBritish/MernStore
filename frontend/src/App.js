@@ -46,11 +46,15 @@ function App() {
 						<Route path="/admin/userlist" element={<AdminUserList />} />
 						<Route path="/admin/user/:id/edit" element={<AdminUserEdit />} />
 						<Route path="/admin/productlist" element={<AdminProductList />} />
+						<Route
+							path="/admin/productlist/page/:pageNumber"
+							element={<AdminProductList />}
+						/>
 						<Route path="/admin/product/:id/edit" element={<AdminProductEdit />} />
 						<Route path="/admin/orderlist" element={<AdminOrderList />} />
 
 						<Route path="/search/:keyword" element={<ProductList />} />
-						<Route path="/search/:pageNumber" element={<ProductList />} />
+						<Route path="/page/:pageNumber" element={<ProductList />} />
 						<Route path="/search/:keyword/page/:pageNumber" element={<ProductList />} />
 					</Routes>
 				</Container>
