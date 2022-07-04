@@ -31,6 +31,11 @@ const getOneProduct = async (req, res) => {
 	}
 };
 
+const getTopProducts = async (req, res) => {
+	const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+	res.json(products);
+};
+
 const deleteOneProduct = async (req, res) => {
 	const { id } = req.params;
 	const product = await Product.findById(id);
@@ -129,6 +134,7 @@ const createProductReview = async (req, res) => {
 module.exports = {
 	getProducts,
 	getOneProduct,
+	getTopProducts,
 	deleteOneProduct,
 	createProduct,
 	updateProduct,

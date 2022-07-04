@@ -15,6 +15,8 @@ const control = require("../controllers/productController");
 
 router.get("/", catchAsync(control.getProducts));
 
+router.get("/top", catchAsync(control.getTopProducts));
+
 router.get("/:id", catchAsync(control.getOneProduct));
 
 router.post("/", isAuth, isAdmin, catchAsync(control.createProduct));
