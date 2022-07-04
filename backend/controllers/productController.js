@@ -1,7 +1,7 @@
 const Product = require("../models/productModel");
 
 const getProducts = async (req, res) => {
-	const pageSize = 2;
+	const pageSize = 8;
 	const page = Number(req.query.pageNumber) || 1;
 	const keyword = req.query.keyword
 		? {
@@ -13,7 +13,6 @@ const getProducts = async (req, res) => {
 		: {};
 
 	const count = await Product.countDocuments(keyword);
-	console.log(keyword);
 	const products = await Product.find(keyword)
 		.limit(pageSize)
 		.skip(pageSize * (page - 1));
