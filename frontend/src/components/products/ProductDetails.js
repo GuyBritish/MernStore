@@ -28,6 +28,7 @@ import {
 	FilledInput,
 	FormGroup,
 } from "@mui/material";
+import Meta from "../layout/Meta";
 
 const ProductDetails = (props) => {
 	const params = useParams();
@@ -85,6 +86,7 @@ const ProductDetails = (props) => {
 				<AlertMessage variant="error">{error}</AlertMessage>
 			) : (
 				<React.Fragment>
+					<Meta title={prod.name} />
 					<Grid container>
 						<Grid item md={6}>
 							<img

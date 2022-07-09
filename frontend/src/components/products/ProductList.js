@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { listProducts } from "../../actions/productActions";
 
@@ -11,6 +11,7 @@ import AlertMessage from "../Interface/AlertMessage";
 import { Grid } from "@mui/material";
 import Paginate from "../Interface/Paginate";
 import ProductCarousel from "../Interface/ProductCarousel";
+import Meta from "../layout/Meta";
 
 const ProductList = () => {
 	const params = useParams();
@@ -25,7 +26,14 @@ const ProductList = () => {
 
 	return (
 		<React.Fragment>
-			{!params.keyword && <ProductCarousel />}
+			<Meta />
+			{!params.keyword ? (
+				<ProductCarousel />
+			) : (
+				<Link className="btn btn-light my-3" to="/">
+					Go Back
+				</Link>
+			)}
 			<div className="my-4">
 				<h1>Latest Products</h1>
 				{loading ? (
