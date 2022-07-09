@@ -7,14 +7,28 @@ import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 const Product = (props) => {
 	const prod = props.product;
+
+	const formatSize = (url) => {
+		const lastSlice = url.lastIndexOf("upload/") + 6;
+		return url.slice(0, lastSlice) + "/w_500,h_500,c_scale" + url.slice(lastSlice);
+	};
+
 	return (
-		<Card className="p-3 rounded" variant="outlined" elevation={0}>
+		<Card className="rounded" variant="outlined" elevation={0}>
 			<Link to={`/products/${prod._id}`}>
-				<CardMedia component="img" alt={`${prod.name} image`} image={`${prod.image}`} />
+				<CardMedia
+					component="img"
+					alt={`${prod.name} image`}
+					image={`${formatSize(prod.image)}`}
+				/>
 			</Link>
 			<CardContent>
 				<Link to={`/products/${prod._id}`} className="cardlink">
-					<Typography gutterBottom component="div" style={{ fontWeight: 500 }}>
+					<Typography
+						gutterBottom
+						component="div"
+						style={{ fontWeight: 500, height: "2em" }}
+					>
 						{prod.name}
 					</Typography>
 				</Link>
