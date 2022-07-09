@@ -51,7 +51,6 @@ export const listTopProducts = () => {
 	return async (dispatch) => {
 		try {
 			dispatch({ type: PRODUCT_TOP_REQUEST });
-
 			const options = {
 				url: `/api/products/top`,
 			};

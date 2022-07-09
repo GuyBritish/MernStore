@@ -10,6 +10,7 @@ import AlertMessage from "../Interface/AlertMessage";
 
 import { Grid } from "@mui/material";
 import Paginate from "../Interface/Paginate";
+import ProductCarousel from "../Interface/ProductCarousel";
 
 const ProductList = () => {
 	const params = useParams();
@@ -24,25 +25,28 @@ const ProductList = () => {
 
 	return (
 		<React.Fragment>
-			<h1>Latest Products</h1>
-			{loading ? (
-				<Loader />
-			) : error ? (
-				<AlertMessage variant="error">{error}</AlertMessage>
-			) : (
-				<React.Fragment>
-					<Grid container className="my-3" spacing={3}>
-						{products.map((prod) => {
-							return (
-								<Grid item key={prod._id} sm={12} md={6} lg={4} xl={3}>
-									<Product product={prod} />
-								</Grid>
-							);
-						})}
-					</Grid>
-					<Paginate page={page} pages={pages} keyword={params.keyword ?? ""} />
-				</React.Fragment>
-			)}
+			{!params.keyword && <ProductCarousel />}
+			<div className="my-4">
+				<h1>Latest Products</h1>
+				{loading ? (
+					<Loader />
+				) : error ? (
+					<AlertMessage variant="error">{error}</AlertMessage>
+				) : (
+					<React.Fragment>
+						<Grid container className="my-2" spacing={3}>
+							{products.map((prod) => {
+								return (
+									<Grid item key={prod._id} sm={12} md={6} lg={4} xl={3}>
+										<Product product={prod} />
+									</Grid>
+								);
+							})}
+						</Grid>
+						<Paginate page={page} pages={pages} keyword={params.keyword ?? ""} />
+					</React.Fragment>
+				)}
+			</div>
 		</React.Fragment>
 	);
 };

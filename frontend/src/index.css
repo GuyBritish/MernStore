@@ -33,3 +33,29 @@ main {
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+	display: flex;
+}
+
+.carousel-caption {
+	position: absolute;
+	top: 0;
+}
+
+.carousel-caption h3 {
+	color: #fff;
+}
+
+.carousel img {
+	height: 300px;
+	padding: 30px;
+	margin: 40px;
+	border-radius: 20%;
+}
+
+.carousel a {
+	margin: 0 auto;
+}

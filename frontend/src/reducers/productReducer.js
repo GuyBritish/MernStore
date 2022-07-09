@@ -51,9 +51,7 @@ export const productTopReducer = (state = { products: [], loading: false }, acti
 			return { products: [], loading: true };
 		case PRODUCT_TOP_SUCCESS:
 			return {
-				products: action.payload.products,
-				pages: action.payload.pages,
-				page: action.payload.page,
+				products: action.payload,
 				loading: false,
 			};
 		case PRODUCT_TOP_FAIL:
