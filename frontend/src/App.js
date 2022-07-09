@@ -26,8 +26,8 @@ function App() {
 	return (
 		<React.Fragment>
 			<Header />
-			<main className="py-3">
-				<Container>
+			<main className="py-3 px-0">
+				<Container maxWidth="lg">
 					<Routes>
 						<Route path="/" element={<ProductList />} />
 						<Route path="/products/:id" element={<ProductDetails />} />
