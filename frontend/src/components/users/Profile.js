@@ -58,7 +58,8 @@ const Profile = () => {
 		if (!userInfo) {
 			navigate(resolvePath("/login"), { replace: true });
 		} else {
-			if (!user.name) {
+			if (!user.name || success) {
+				dispatch({ type: USER_UPDATE_RESET });
 				dispatch(getUser("profile"));
 				dispatch(listMyOrders());
 			} else {
@@ -67,7 +68,7 @@ const Profile = () => {
 				setEmail(user.email);
 			}
 		}
-	}, [navigate, userInfo, dispatch, user]);
+	}, [navigate, userInfo, dispatch, user, success]);
 
 	const updateProfileHandler = (event) => {
 		event.preventDefault();

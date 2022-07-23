@@ -186,6 +186,12 @@ export const updateProfile = (user) => {
 				type: USER_UPDATE_SUCCESS,
 				payload: resp.data,
 			});
+
+			dispatch({
+				type: USER_LOGIN_SUCCESS,
+				payload: resp.data,
+			});
+			localStorage.setItem("userInfo", JSON.stringify(resp.data));
 		} catch (err) {
 			dispatch({
 				type: USER_UPDATE_FAIL,
