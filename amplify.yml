@@ -1,0 +1,24 @@
+version: 1
+frontend:
+    phases:
+        preBuild:
+            commands:
+                - cd backend
+                - npm ci
+                - cd ../frontend
+                - npm ci
+
+        # IMPORTANT - Please verify your build commands
+        build:
+            commands:
+                - npm run build
+                - cd ..
+                - npm start
+    artifacts:
+        # IMPORTANT - Please verify your build output directory
+        baseDirectory: /
+        files:
+            - "**/*"
+    cache:
+        paths:
+            - node_modules/**/*
