@@ -19,6 +19,10 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "../frontend/build")));
+}
+
 if (process.env.NODE_ENV === "development") {
 	const morgan = require("morgan");
 	app.use(morgan("dev"));
@@ -32,9 +36,11 @@ const orderRoutes = require("./routes/order");
 const paymentRoutes = require("./routes/payment");
 const morgan = require("morgan");
 
-app.get("/", (req, res) => {
-	res.send("API is running...");
-});
+if (process.env.NODE_ENV === "development") {
+	app.get("/", (req, res) => {
+		res.send("API is running...");
+	});
+}
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
