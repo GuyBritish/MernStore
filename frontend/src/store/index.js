@@ -30,6 +30,8 @@ import {
 	userEditReducer,
 } from "../reducers/userReducer";
 
+import { getUserInfo } from "../utils/auth";
+
 /* -------------------------------------------------------------------------- */
 
 const initialState = {
@@ -45,9 +47,7 @@ const initialState = {
 			: "",
 	},
 	userAuth: {
-		userInfo: localStorage.getItem("userInfo")
-			? JSON.parse(localStorage.getItem("userInfo"))
-			: null,
+		userInfo: getUserInfo(),
 	},
 };
 
