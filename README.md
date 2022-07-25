@@ -17,19 +17,19 @@ Created with React, Material UI, Node.js, Express, and MongoDB. Deployed using A
 <p> <img align="center" src="https://i.ibb.co/jRc3ZBL/Dashboard.png"/> </p>
 
 ### Product Details page
-<p> <img align="center" src="https://i.ibb.co/R6T8SJy/Product.png"/> </p>
+<p> <img align="center" src="https://i.ibb.co/19bVvYc/Product.png"/> </p>
 
 ### Shopping Cart
-<p> <img align="center" src="https://i.ibb.co/hyVy3ZL/Cart.png"/> </p>
+<p> <img align="center" src="https://i.ibb.co/Yfdzq03/Cart.png"/> </p>
 
 ### Order page
-<p> <img align="center" src="https://i.ibb.co/6P1HnqK/Order.png"/> </p>
+<p> <img align="center" src="https://i.ibb.co/RDqq6Hp/Order.png"/> </p>
 
 ### My Orders page
-<p> <img align="center" src="https://i.ibb.co/kSrvjm1/Orders.png"/> </p>
+<p> <img align="center" src="https://i.ibb.co/1nqFG7W/Orders.png"/> </p>
 
 ### Users Admin Management
-<p> <img align="center" src="https://i.ibb.co/YRMs5Tx/Users-Ad.png"/> </p>
+<p> <img align="center" src="https://i.ibb.co/dMZSfZ5/Users-Ad.png"/> </p>
 
 ### Product Edit
-<p> <img align="center" src="https://i.ibb.co/Zd0cjx2/Product-Edit-Ad.png"/> </p>
+<p> <img align="center" src="https://i.ibb.co/5LpVq0G/Product-Edit-Ad.png"/> </p>
