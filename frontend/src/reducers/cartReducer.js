@@ -1,6 +1,7 @@
 import {
 	CART_ADD_ITEM,
 	CART_REMOVE_ITEM,
+	CART_CLEAR,
 	CART_SAVE_PAYMENT_METHOD,
 	CART_SAVE_SHIPPING_INFO,
 } from "../constants/cartConst";
@@ -33,6 +34,11 @@ export const cartReducer = (state = { cartItems: [], shippingAddress: {} }, acti
 				cartItems: state.cartItems.filter((x) => {
 					return x.id !== action.payload;
 				}),
+			};
+		case CART_CLEAR:
+			return {
+				...state,
+				cartItems: [],
 			};
 		case CART_SAVE_SHIPPING_INFO:
 			return {

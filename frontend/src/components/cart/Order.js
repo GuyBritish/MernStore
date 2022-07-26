@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { createOrder } from "../../actions/orderActions";
 
+import { ORDER_CREATE_RESET } from "../../constants/orderConst";
+
 import AlertMessage from "../Interface/AlertMessage";
 
 import { Grid, List, ListItem, Typography, Divider, Card, Button } from "@mui/material";
@@ -32,9 +34,10 @@ const Order = () => {
 
 	useEffect(() => {
 		if (success) {
+			dispatch({ type: ORDER_CREATE_RESET });
 			navigate(`/order/${order._id}`);
 		}
-	}, [success, navigate, order]);
+	}, [success, navigate, order, dispatch]);
 
 	const placeOrderHandler = () => {
 		dispatch(
