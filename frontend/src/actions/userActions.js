@@ -112,12 +112,13 @@ export const register = (name, email, password) => {
 
 export const logout = () => {
 	return (dispatch) => {
-		localStorage.removeItem("userInfo");
+		localStorage.clear();
 		dispatch({ type: USER_LOGOUT });
 		dispatch({ type: USER_DETAILS_RESET });
 		dispatch({ type: ORDER_USER_LIST_RESET });
 		dispatch({ type: USER_LIST_RESET });
 		dispatch({ type: USER_EDIT_RESET });
+		document.location.href = "/";
 	};
 };
 
