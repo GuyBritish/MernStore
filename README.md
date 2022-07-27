@@ -1,7 +1,7 @@
 # :convenience_store: MernStore
 Welcome to MernStore - a minimalist Ecommerce platform with dynamic shopping cart, smart payment, and comprehensive admin controls.
 
-Created with React, Material UI, Node.js, Express, and MongoDB. Deployed using AWS E2C and Nginx.
+Created with React, Material UI, Node.js, Express, and MongoDB. Deployed using AWS EC2 and Nginx.
 
 ## ⭐ Features
 - Effortlessly find products using the search feature
