@@ -14,7 +14,7 @@ Created with React, Material UI, Node.js, Express, and MongoDB. Deployed using A
 
 ## 📸 Snapshots
 ### Dashboard
-<p> <img align="center" src="https://i.ibb.co/jRc3ZBL/Dashboard.png"/> </p>
+<p> <img align="center" src="https://i.ibb.co/R0Ns4P8/Dashboard.png"/> </p>
 
 ### Product Details page
 <p> <img align="center" src="https://i.ibb.co/19bVvYc/Product.png"/> </p>
